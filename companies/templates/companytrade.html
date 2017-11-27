@@ -1,0 +1,59 @@
+{% extends "base.html" %}
+{% include "trade.js" %}
+{% load bootstrap_tags %}
+{% load companies_extras %}
+{% block content %}
+    <span id="tradepage"></span>
+    <div class="colwrapper color">  
+            <div class="colwrapper" style="background-color: rgba({{companyelement.element.color}},0.2);">
+                <div class="elementinfo borderbottom">     
+                        <p>Element:</p>
+                        <p>{{ companyelement.element.name }}</p>
+                    </div>
+                    <div class="elementinfo borderbottom">               
+                        <p>Weight:</p>
+                        <p>{{ companyelement.element.weight }}u</p>
+                    </div>         
+                    <div class="elementinfo borderbottom"> 
+                        <p>Price:</p>
+                        <p ><span id="pricecheck">{{ companyelement.price }}</span> Glorks</p>               
+                    </div>
+                    <div class="elementinfo borderbottom"> 
+                        <p>Amount:</p>
+                        <p>{{ companyelement.amount }} Mt's</p>               
+                    </div>
+            </div>
+            <div class="colwrapper" style="background-color: rgba({{companyelement.element.color}},0.2);">
+                <div class="elementinfo borderbottom">     
+                        <p>Average Price:</p>
+                        <p>{{ average }}</p>
+                </div> 
+                <div class="elementinfo borderbottom">
+                        <!-- find company distance     -->
+                        {% find_distance companyelement.company.locationx companyelement.company.locationy companyelement.company.locationz player.locationx player.locationy player.locationz as the_distance %}
+                        <p>Distance:</p>
+                        <p> <span id="distance">{{ the_distance }}</span>: LY</p>
+                        <p>Fuel cost for full inventory:</p>
+                        <p>{% fuel_cost the_distance companyelement.amount %}C</p>
+                </div>         
+            </div>           
+        <h1>How many do you want to buy?</h1>
+        <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | as_bootstrap}}                
+                <button type="submit" class="btn CCbutton">Buy for <span id="totalprice">0</span> Glorks</button>
+                <span>+ Shipping: <span id="fuelcost"></span> g</span>
+                <hr>
+                {% if messages %}
+                    <div class="alert alert-success">
+                        <div class="messages">
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+        </form>
+    </div>
+
+{% endblock %}

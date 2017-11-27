@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block content %}
+{% load companies_extras %}
+<div class="medheadline">
+   THE ELEMENT MARKETPLACE
+</div>
+<div class="medheadline" style="background-color: rgba({{element.color }},0.7);">
+   AVERAGE PRICE: {{ average }}
+</div>
+
+<div class=" rowwrapper">
+{% for companyelement in companyelements %}
+<div class="rowcolwrapper elementwrapper rel color">
+        <div class="colwrapper borderbottom" style="background-color: rgba({{element.color}},0.2);">
+            <div class="elementinfo borderbottom">   
+                <p>Trader:</p>
+                <p>{{ companyelement.company }}</p>
+            </div>
+            <div class="elementinfo borderbottom">   
+                <p>Element:</p>
+                <p>{{ companyelement.element.name }}</p>
+            </div>
+            <div class="elementinfo borderbottom">               
+                <p>Weight:</p>
+                <p>{{ companyelement.element.weight }}u</p>
+            </div>         
+            <div class="elementinfo borderbottom"> 
+                <p>Price:</p>
+                <p>{{ companyelement.price }} Glorks</p>               
+            </div>
+            <div class="elementinfo borderbottom"> 
+                <p>Amount:</p>
+                <p>{{ companyelement.amount }} Mt's</p>               
+            </div>
+            <div class="elementinfo"> 
+                <p>Buy Stock:</p>
+                <button class="btn CCbutton" onclick="location.href='{% url 'companytrade' companyelement.company.pk companyelement.pk %}'">Purchase</button>
+            </div>
+        </div>
+        <div class="el border" style="background-color: rgb({{ companyelement.element.color }});">
+            <p> {{ companyelement.amount }}: Units</p>
+            <p> {{ companyelement.price}}: Credits</p>
+            <p> {% find_distance companyelement.company.locationx companyelement.company.locationy companyelement.company.locationz player.locationx player.locationy player.locationz %}: LY</p>
+        </div>  
+</div>          
+{% endfor %}
+</div>
+{% endblock %}

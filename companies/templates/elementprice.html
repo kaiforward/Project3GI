@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+{% block content %}
+    <div class="colwrapper color">	
+            <div class="colwrapper borderbottom" style="background-color: rgba({{companyelement.element.color}},0.2);">
+                <div class="elementinfo borderbottom">     
+                        <p>Element:</p>
+                        <p>{{ companyelement.element.name }}</p>
+                    </div>
+                    <div class="elementinfo borderbottom">               
+                        <p>Weight:</p>
+                        <p>{{ companyelement.element.weight }}u</p>
+                    </div>         
+                    <div class="elementinfo borderbottom"> 
+                        <p>Price:</p>
+                        <p>{{ companyelement.price }} Glorks</p>               
+                    </div>
+                    <div class="elementinfo borderbottom"> 
+                        <p>Amount:</p>
+                        <p>{{ companyelement.amount }} Mt's</p>               
+                    </div>
+            </div>
+            <div class="colwrapper borderbottom" style="background-color: rgba({{companyelement.element.color}},0.2);">
+                <div class="elementinfo borderbottom">     
+                        <p>Average Price:</p>
+                        <p>{{ average }}</p>
+                    </div>        
+            </div>
+
+        <h1>Choose your new price, be competitive!</h1>
+        <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | as_bootstrap}}
+                <button type="submit" class="btn CCbutton" >Save</button>
+        </form> 
+    </div>                
+{% endblock %}

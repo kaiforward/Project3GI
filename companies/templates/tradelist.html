@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="medheadline">
+   RECENT TRADES
+</h2>
+<div class="colwrapper">       
+    {% for trade in trades %}
+        <div class="color">
+            <div class="tradewrapper borderbottom"  style="background-color: rgba({{trade.element.color}},0.2);">
+                <div class="trade">   
+                    <h3>Element:</h3>
+                    <p>{{ trade.element.name }}</p>
+                </div>
+                <div class="trade">               
+                    <h3>Buyer:</h3>
+                    <p>{{ trade.buyer.name }}</p>
+                </div>         
+                <div class="trade"> 
+                    <h3>Merchant:</h3>
+                    <p>{{ trade.seller.name }}</p>               
+                </div>
+                <div class="trade"> 
+                    <h3>Amount:</h3>
+                    <p>{{ trade.amount }}z</p>               
+                </div>
+                <div class="trade"> 
+                    <h3>Price Paid:</h3>
+                    <p>{{ trade.price }}c</p>               
+                </div>
+                <div class="trade"> 
+                    <h3>Date:</h3>
+                    <p>{{ trade.date_created }}</p>               
+                </div>
+                <div class="trade"> 
+                    <h3>Distance:</h3>
+                    <p>{{ trade.distance }}</p>               
+                </div>
+            </div> 
+        </div>          
+    {% endfor %}
+</div>
+{% endblock %}

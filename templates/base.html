@@ -1,0 +1,68 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>Galactic Index</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400" rel="stylesheet">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="{% static 'nav.css' %}">
+</head>
+
+<body>
+<img src="{% static 'images/a.jpg' %}" class="abs backgroundimg">
+<div id="navbar" class="CC">
+    <div id="navblock">
+      <h1 id="navtitle" class="CC">Galactic Index</h1>
+      <p class="menuname">more</p>
+      <div class="navbutton CClink" tabindex="0">
+            <i class=" fa fa-angle-double-down fadein" aria-hidden="true"></i>
+            <i class="fa fa-angle-double-up fadeout abs" aria-hidden="true"></i>
+      </div>
+    </div>
+    <div class="abslink">
+        <div id="linkbar" class="CC mobilehidden">
+            <a href="" class="linkimg"></a>
+            <a href="/" class="link CClink">Home</a>      
+            {% if user.is_active %}
+                <a href="{% url 'logout' %}" class="link CClink">Log Out</a>
+                <a href="{% url 'company' %}" class="link CClink">Company</a>
+                <a href="{% url 'elements' %}" class="link CClink">Elements</a> 
+                <a href="{% url 'allcompanies' %}" class="link CClink">Traders</a>
+                <a href="{% url 'tradelist' %}" class="link CClink">Trade List</a>
+                <a href="{% url 'shipsall' %}" class="link CClink">Ships</a>
+                <a href="{% url 'minesall' %}" class="link CClink">Mines</a>                 
+            {% else %}
+              <a href="{% url 'register' %}" class="link CClink">Register</a>
+              <a href="{% url 'login' %}" class="link CClink">Log In</a>
+            {% endif %}
+        </div>
+    </div>
+</div>
+<div id="pagewrapper" class="pageout">
+<!-- blocks are used to contain elements from other html files in django -->
+    {% block content %} 
+    {% endblock %}
+</div>
+<hr>
+<div class="colwrapper color">
+    <div class="footer ">
+        <p>MORE LINKS!</p>
+    </div>
+
+</div>
+<hr>
+</div>
+<div id="ismobile"></div>
+<div id="isntmobile"></div>
+</body>
+<!-- script references -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://use.fontawesome.com/ed33889719.js"></script>
+<script src="{% static 'nav.js' %}"></script>  
+<script src="{% static 'trade.js' %}"></script>
+</html>

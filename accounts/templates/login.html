@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+{% block content %}
+<div class="colwrapper color">
+    <form role="form" method="post" action="{% url 'login' %}">
+        <legend>Login</legend>
+        {% csrf_token %}
+        {{ form| as_bootstrap }}
+        <div class="form-group">
+            <button type="submit" class="btn CCbutton">Login</button>
+        </div>
+    </form>
+</div>    
+{% endblock %}

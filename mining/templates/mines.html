@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="medheadline">
+   MINING FACILITY
+</h2>
+{% for mine in mines %}
+    <div class="shipoverlay">
+        <h1>{{ mine.get_level_display }}</h1>           
+        <img src="/media/{{ mine.image }}" class="ship">
+        <div class="shipinfo">
+            <button onclick="location.href='{% url 'minedetail' mine.pk %}'">More</button>
+            <h2>Price: {{ mine.price }}</h2> 
+        </div>
+    </div>
+    <div class="shipmobile shipwrapper">
+        <div class="statwrap">
+            <div>   
+                <h2>mine:</h2>
+                <p>{{ mine.mine_size }}</p>
+            </div>
+            <div>               
+                <h2>Price:</h2>
+                <p>{{ mine.price }}c</p>
+            </div>  
+            <div>               
+                <h2>Production:</h2>
+                <p>{{ mine.production }}c</p>
+            </div>       
+        </div>
+    </div>
+    <hr>     
+{% endfor %}
+{% endblock %}

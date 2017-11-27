@@ -1,0 +1,179 @@
+{% extends "base.html" %}
+{% load companies_extras %}
+{% load static %}
+{% block content %}
+
+<p class="smallheadline">{{ company.name }}: You are logged in with {{ user.email }} and your last login was {{ user.last_login }}</p>
+
+<div class="container color">
+    <!-- define tabs here -->
+    <ul class="nav nav-tabs">
+        <li class="active"><a data-toggle="tab" href="#company">Company</a></li>
+        <li><a data-toggle="tab" href="#elements">Elements</a></li>
+        <li><a data-toggle="tab" href="#trades">Trades</a></li>
+        <li><a data-toggle="tab" href="#ships">Ships</a></li>
+        <li><a data-toggle="tab" href="#mines">Mines</a></li>
+        <li><a data-toggle="tab" href="#tutorial">Tutorial</a></li>
+    </ul>
+    <!-- player tab -->
+    <div class="tab-content">
+        <div id="company" class="tab-pane fade in active">
+            <h2 class="medheadline">COMPANY OVERVIEW</h2>
+            <div class="color"> 
+                <div class="rowcolwrapper profilewrapper">  
+                    <div class="colwrapper">    
+                        <h2 >Trader:</h2>   
+                        <p>{{ company.name }}</p>
+                        <h2>Glorkian Credits: </h2>
+                        <p>{% readable_int company.money %}c</p>
+                        <h2>Planet Type: </h2>
+                        <p>{{ company.get_planets_display }}</p>
+                        <h2>Location: </h2>
+                        <p>{{ company.locationx }}, {{ company.locationy }}, {{ company.locationz }}</p>
+                    </div>
+                    <div class="colwrapper">
+                        {% if company.image %}
+                                <img src="/media/{{ company.image }}" class="profileimg">
+                        {% else %}
+                                <img src="{% static 'images/mining_facility.jpg' %}" class="profileimg">       
+                        {% endif %}         
+                        <h2>Description: </h2>
+                        <p class="profiledesc">{{ company.description }}</p>
+                        <!-- get_*blank*_display finds the verbose version of choice -->
+                        <button class="btn CCbutton" onclick="location.href='{% url 'editcompany' %}'">Change Company Profile</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- element tab -->
+        <div id="elements" class="tab-pane fade">
+            <h2 class="medheadline">ELEMENT STORAGE</h2>
+            <div class=" rowwrapper">
+                {% for companyelement in companyelements %}
+                    <div class="rowcolwrapper elementwrapper rel color">
+                        <div class="colwrapper borderbottom" style="background-color: rgba({{element.color}},0.2);">
+                            <div class="elementinfo borderbottom">     
+                                    <p>Element:</p>
+                                    <p>{{ companyelement.element.name }}</p>
+                                </div>
+                                <div class="elementinfo borderbottom">               
+                                    <p>Weight:</p>
+                                    <p>{{ companyelement.element.weight }}u</p>
+                                </div>         
+                                <div class="elementinfo borderbottom"> 
+                                    <p>Price:</p>
+                                    <p>{{ companyelement.price }} Glorks</p>               
+                                </div>
+                                <div class="elementinfo borderbottom"> 
+                                    <p>Amount:</p>
+                                    <p>{{ companyelement.amount }} Mt's</p>               
+                                </div>
+                                <div class="elementinfo"> 
+                                    <p>Set Price:</p>
+                                    <button class="btn CCbutton" onclick="location.href='{% url 'elementprice' companyelement.pk %}'">Price</button>
+                                </div>
+                        </div>
+                        <div class="el borderbottom" style="background-color: rgb({{ companyelement.element.color }});">
+                            <div>
+                                <h1> {{ companyelement.element.tag.0 }} </h1>
+                                <h2> {{ companyelement.element.tag.1 }} </h2>
+                            </div>
+                            <p> {{ companyelement.element.name}} </p>
+                        </div>  
+                    </div>          
+                {% endfor %}
+            </div>            
+        </div>
+        <!-- tradelist tab -->
+        <div id="trades" class="tab-pane fade">
+            <h2 class="medheadline"> RECENT TRADES </h2>
+            <div class="colwrapper">       
+                {% for trade in trades %}
+                    <div class="color">
+                        <div class="tradewrapper borderbottom"  style="background-color: rgba({{trade.element.color}},0.2);">
+                            <div class="trade">   
+                                <h3>Element:</h3>
+                                <p>{{ trade.element.name }}</p>
+                            </div>
+                            <div class="trade">               
+                                <h3>Buyer:</h3>
+                                <p>{{ trade.buyer.name }}</p>
+                            </div>         
+                            <div class="trade"> 
+                                <h3>Merchant:</h3>
+                                <p>{{ trade.seller.name }}</p>               
+                            </div>
+                            <div class="trade"> 
+                                <h3>Amount:</h3>
+                                <p>{{ trade.amount }}z</p>               
+                            </div>
+                            <div class="trade"> 
+                                <h3>Price Paid:</h3>
+                                <p>{{ trade.price }}c</p>               
+                            </div>
+                            <div class="trade"> 
+                                <h3>Date:</h3>
+                                <p>{{ trade.date_created }}</p>               
+                            </div>
+                            <div class="trade"> 
+                                <h3>Distance:</h3>
+                                <p>{{ trade.distance }}</p>               
+                            </div>
+                        </div> 
+                    </div>           
+                {% endfor %}
+            </div>
+        </div>
+        <!-- ship tab -->
+        <div id="ships" class="tab-pane fade">
+
+        </div>
+        <!-- mine tab -->
+        <div id="mines" class="tab-pane fade">
+            <div class="colwrapper">
+                <p class="smallheadline">Last Production check on {{ company.last_checked }}</p> 
+                {% for mine_prod in mines_prod %}
+                    <p class="smallheadline">{{ mine_prod.1 }} {{ mine_prod.0 }} {{ mine_prod.2 }} mine, produced {{ mine_prod.3 }} units.</p>  
+                {% endfor %}  
+            </div>
+            {% for owned in mines %}
+                <div class="shipoverlay">
+                    <h1>{{ owned.mine.get_level_display }}</h1>           
+                    <img src="/media/{{ owned.mine.image }}" class="ship">
+                </div>
+                <div class="shipwrapper">
+                    <div class="statwrap">
+                        <div>   
+                            <h2> mine size:</h2>
+                            <p>{{ owned.mine.mine_size }}</p>
+                        </div>
+                        <div>               
+                            <h2>Production:</h2>
+                            <p>{{ owned.mine.production }}c</p>
+                        </div> 
+                        <div>               
+                            <h2>Amount:</h2>
+                            <p>{{ owned.amount }}</p>
+                        </div>        
+                    </div>
+                    <div>               
+                        <h2>Description:</h2>
+                        <p>Production is measured per-hour but is delivered on a continuous basis. Upgrades to the matter collectors can increase production significantly.</p>
+                    </div>
+                    <div>               
+                        <h2>Upgrades:</h2>
+                        <p>No Current Upgrades.</p>
+                    </div>
+                </div>
+                <hr>
+            {% endfor %}          
+        </div>
+        <div id="tutorial" class="tab-pane fade">
+
+        </div>
+<!--         <div id="ships" class="tab-pane fade">
+
+        </div> -->
+    </div>
+</div>
+{% endblock %}

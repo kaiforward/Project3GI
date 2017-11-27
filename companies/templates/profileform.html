@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block content %}
+        {% load bootstrap_tags %}
+        <div class="colwrapper color">
+                <p>You are logged in as {{ user.email }} and your last login was {{ user.last_login }}</p>
+                
+                <h1>Now Choose your Company Details!</h1>
+                <form method="POST" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {{ form | as_bootstrap}}
+                        <button type="submit" class="btn CCbutton">Save</button>
+                </form>
+        </div>
+{% endblock %}

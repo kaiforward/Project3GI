@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+{% block content %}
+<span id="minebuypage"></span>
+<h2 class="medheadline">
+   MINING FACILITY
+</h2>
+    <div class="shipoverlay">
+        <h1>{{ mine.get_level_display }}</h1>           
+        <img src="/media/{{ mine.image }}" class="ship">
+    </div>
+    <div class="shipwrapper">
+        <div class="statwrap">
+            <div>   
+                <h2>mine size:</h2>
+                <p>{{ mine.mine_size }}</p>
+            </div>
+            <div>               
+                <h2>Price:</h2>
+                <p><span id="pricecheck">{{ mine.price }}</span>G</p>
+            </div>  
+            <div>               
+                <h2>Production:</h2>
+                <p>{{ mine.production }}c</p>
+            </div>       
+        </div>
+        <div>               
+            <h2>Description:</h2>
+            <p>Production is measured per-hour but is delivered on a continuous basis. Upgrades to the matter collectors can increase production significantly.</p>
+        </div>
+    </div>
+    <hr>
+    <div class="colwrapper color">               
+        <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | as_bootstrap}}
+                <button type="submit" class="btn CCbutton">Purchase for <span id="totalprice">0</span></button>
+                <hr>
+                {% if messages %}
+                    <div class="alert alert-success">
+                        <div class="messages">
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+        </form>
+    </div> 
+    <hr>      
+{% endblock %}

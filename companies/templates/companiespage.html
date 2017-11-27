@@ -1,0 +1,32 @@
+{% extends "base.html" %}
+{% block content %}
+{% load companies_extras %}
+{% for company in companies %}
+    <div class="color"> 
+        <div class="rowcolwrapper profilewrapper">	
+        	<div class="colwrapper">	
+        		<h2 >Trader:</h2>	
+        		<p>{{ company.name }}</p>
+        		<h2>Glorkian Credits: </h2>
+        		<p>{% readable_int company.money %}c</p>
+                <h2>Planet Type: </h2>
+                <p>{{ company.get_planets_display }}</p>
+                <h2>Location: </h2>
+                <p>{{ company.locationx }}, {{ company.locationy }}, {{company.locationz}}</p>
+                <h2>Distance: </h2>
+                <p>{% find_distance company.locationx company.locationy company.locationz player.locationx player.locationy player.locationz %}</p>
+        	</div>
+        	<div class="colwrapper">
+                {% if company.image %}
+                        <img src="/media/{{ company.image }}" class="profileimg">
+                {% else %}
+                        <img src="http://placehold.it/100" style="width:100px; height: 100px; background-color: #12ABB2; color: #ffffff;" class="img-circle imgtemp">       
+                {% endif %}         
+                <h2>Description: </h2>
+                <p class="profiledesc">{{ company.description }}</p>
+        	</div>
+        </div>
+    </div>
+<hr>
+{% endfor %}
+{% endblock %}

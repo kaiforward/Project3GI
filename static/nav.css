@@ -1,0 +1,706 @@
+* {
+	box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	-webkit-box-sizing: border-box;
+}
+
+a {text-decoration: none; color: none;}
+a:link {color: none; text-decoration: none;}
+a:-webkit-any-link { text-decoration: none; color: unset; }
+a:hover { text-decoration: none; }
+a:active { text-decoration: none; }
+
+body { 
+	font-family: 'Josefin Sans', sans-serif; 
+	font-size: 22px;
+	font-weight: lighter;
+}
+h1, h2, h3 {
+	font-family: inherit;
+	line-height: inherit;
+	margin: 10px 0px;
+}
+legend {
+	color: inherit;
+	background-color: inherit;
+	font-size: 1.5em;
+}
+p {
+	font-size: 1em;
+}
+hr {
+	color:rgb(60,60,60);
+}
+html {
+	min-width: 318px;
+}
+
+/*-------------NAVIGATION-----------------*/
+
+#navbar {
+	display: flex;
+	flex: 1;
+	align-items: center;
+	border-bottom: 1px solid white;
+}
+
+#navblock {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	padding: 0% 1%;
+}
+
+#navtitle {
+	margin-top: 10px;
+	margin-bottom: 10px;
+	flex: 2;
+	line-break: strict;
+}
+.navbutton {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	position: relative;
+	pointer-events: none;	
+	opacity: 0;
+	font-size: 24px;
+	padding:0px 4px;
+	border: solid 2px white;
+	border-radius: 4px;
+	transition: opacity 0.2s;
+	-webkit-transition: opacity 0.2s;
+}
+/* for my link menu i use a combination of visibility hidden, position absolute and transition the opacity,
+so the menu is hidden to the user, but is still visible to searches/screen readers*/
+.abslink { /*when in mobile mode makes sure absolutely position linkbar keeps same pageflow*/
+	display: flex;
+	position: relative;
+	width: 100%;
+}
+#linkbar { /*holds a generic set of links can be modified to be absolutely positioned*/
+	z-index: 10;
+	display: flex;
+	flex: 1;
+	padding: 2px;
+}
+.mobilehidden { /*used to hide mobile styled menu's until opened*/
+	visibility: visible;
+	opacity: 1;
+}
+.link { /*holds any link*/
+	text-align: center;
+	border-left: solid white 1px;
+	font-size:1.25em;
+	flex: 1;
+	padding: 5px;
+}
+.fadein { /*used to fade in specific menu/nav objects*/
+	opacity: 1;
+	transition: opacity 0.5s;
+	-webkit-transition: opacity 0.5s;
+}
+.fadeout { /*used to fade in specific menu/nav objects*/
+	opacity: 0;
+	transition: opacity 0.5s;
+	-webkit-transition: opacity 0.5s;
+}
+.abs { /*abs attribute for my icons without changing those classes*/
+	position: absolute;
+}
+.rel { /*abs attribute for my icons without changing those classes*/
+	position: relative;
+}
+/*standard colour scheme, and hover/active using the colour scheme for all objects.*/
+.CC { /*chosen color*/
+	background-color: #d84c4c;
+	color: white;
+}
+.CCbutton { /*chosen color*/
+	font-size: 1.5rem;
+	width: fit-content;
+	background-color: #d84c4c;
+	color: white;
+	border: solid #d84c4c 2px;
+}
+.CCbutton:hover { /*chosen color for hovered links*/
+	background-color: white;
+	color: #d84c4c;
+	transition: background-color 0.2s, color 0.2s;
+	-webkit-transition: background-color 0.2s, color 0.2s;
+}
+.CCreverse { /*chosen color*/
+	background-color: white;
+	color: #d84c4c;
+}
+.CClink { /*chosen color links*/
+	background-color: #d84c4c;
+	color: white;
+	border-color: white;
+	transition: background-color 0.2s, color 0.2s;
+	-webkit-transition: background-color 0.2s, color 0.2s;
+}
+.CClink:hover { /*chosen color for hovered links*/
+	background-color: white;
+	color: #d84c4c;
+	border-color: #d84c4c;
+	transition: background-color 0.2s, color 0.2s;
+	-webkit-transition: background-color 0.2s, color 0.2s;
+}
+.menuname {
+	visibility: hidden;
+	pointer-events: none;
+}
+.margintop {
+	margin-top: 20px;
+}
+.border {
+	border: solid #d84c4c 2px;
+}
+.noclick {
+	pointer-events: none;
+}
+#ismobile {
+	display: none;
+}
+#isntmobile {
+	display: block;
+}
+
+/*-------------Normal Page stuff-----------------*/
+
+#pagewrapper {
+	transition: filter 0.3s;
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	margin: 0% 1%;
+	padding-bottom: 10px;
+	padding-top: 10px;
+	transition: opacity 0.5s;
+	-webkit-transition: opacity 0.5s;
+	transition-delay: 0.2s;
+}
+.pagein { /*used to fade in specific menu/nav objects*/	
+	opacity: 1;
+}
+.pageout { /*used to fade in specific menu/nav objects*/
+	opacity: 0;
+}
+.backgroundimg {
+	z-index:-10; 
+	position: fixed; 
+	opacity: 0.8; 
+	object-fit: cover; 
+	width: 100%; 
+	height: 100%;
+}
+.colwrapper {
+	display: flex;
+	flex-direction: column;
+	flex: 1;
+	padding: 1% 1%;
+}
+.rowcolwrapper {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+.rowwrapper {
+	display: flex;
+	flex-direction: row;
+	flex: 1;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+.rowwrapper_wrap {
+	display: flex;
+	flex-direction: row;
+	flex: 1;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+}
+.borderbottom {
+	border-bottom: solid white 2px;
+}
+.profileimg {
+	margin:10px 0px 10px auto;
+	height: 200px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.imgtemp {
+	margin: 10px 5px 10px auto;
+}
+.lighten {
+	filter: brightness(100%);
+	transition: filter 0.3s;
+}
+.darken {
+	filter: brightness(50%);
+	transition: filter 0.3s;
+}
+/*---------element product classes--------*/
+.elementwrapper {
+	align-items: center;
+	min-height: 250px;
+	width:24.999%;
+}
+.elementwrapper .colwrapper {
+	width: 100%;
+}
+.elementwrapper:hover .el {
+	opacity: 0;
+	pointer-events: none;
+}
+.elementinfo {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.elementinfo div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+}
+.elementinfo p {
+	flex:1;	
+	margin:5px;
+}
+.elementinfo button {
+	margin-top: 5px;
+	width: auto;
+}
+.el { /*element tag*/
+	width: 100%;
+	height: 100%;
+	position: absolute;
+	display: flex;
+	flex:1;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	transition: opacity 0.2s;
+	-webkit-transition: opacity 0.2s;
+}
+.el div {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+.el p {
+	color: white;
+	font-size: 1.5em;
+}
+.el h2{
+	color: white;
+	font-size: 4em;
+}
+.el h1{
+	color: white;
+	font-size: 5em;
+}
+/*headlines*/
+.bigheadline{
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	font-size: 5em;
+	width: 100%;
+	background-color: rgb(54,115,172);
+}
+.medheadline{
+	color: white;
+	font-weight: bold;
+	text-align: center;
+	font-size: 3em;
+	width: 100%;
+	background-color: rgb(54,115,172);
+}
+.smallheadline{
+	color: white;
+	text-align: center;
+	font-size: 1.25em;
+	width: 100%;
+	background-color: rgb(54,115,172);
+}
+
+/*HOMEPAGE*/
+.homewrapper { 
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	position: relative;
+}
+.home { 
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	align-items: center;
+	width: 100%;
+	height: 100%;
+	background-color: unset;
+	color: white;
+}
+.home h1 { 
+	top:50%;
+	width: 100%;
+	background-color: rgba(216,76,76,0.8);
+	text-align: center;
+}
+.home p { 
+	top: 20%;
+	text-align: center;
+	font-size: 2em;
+	width: 100%;
+	background-color: rgba(216,76,76,0.8);
+	padding:0% 2%;
+}
+.home button {
+	margin: 0;
+	bottom: 5%;
+	font-size: 2em;
+	background-color: rgba(216,76,76,0.8);
+}
+.homewrapper img {
+	width: auto;
+	height: auto;
+    object-fit: cover;
+    border-radius: 5px;
+}
+/*trade info*/
+.tradewrapper {
+	display: flex;
+	align-items: flex-start;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+.color {
+	background-color: rgba(236,236,236,0.9);
+	border-radius: 10px;
+}
+.trade {
+	background-color: unset;
+	flex: 1;
+	padding: 0px 5px 0px 5px;
+}
+/*profile info*/
+.profilewrapper * {
+	width: 100%;
+	text-align: center;
+	font-weight: lighter;
+	flex:1;
+}
+.profilewrapper h2 {
+	color: white;
+	background-color: rgb(54,115,172);
+	width: 100%;
+}
+.profilewrapper p {
+	color:rgb(60,60,60);
+}
+.profilewrapper img {
+	min-height: 300px;
+}
+.profilewrapper button {
+	width: fit-content;
+}
+.profilelinkwrapper {
+	background-color: #d84c4c;
+}
+.profilelink {
+	font-size: 1.5em;
+	padding:5px;
+}
+.profiledesc {
+	text-align: left;
+}
+/*ship info*/
+
+.shipwrapper {	
+	border-radius: 5px;
+	background-color: rgba(60,60,60,0.2);
+}
+.shipwrapper p, h2 {	
+	margin: 0px;
+}
+.statwrap {
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+}
+.statwrap div {
+	display: flex;
+	flex:1;
+	flex-direction: column;
+}
+.shipwrapper h2 {
+	font-size: 1em;
+	padding:10px;
+	color: white;
+	background-color: rgba(60,60,60,0.8);
+}
+.shipwrapper p {
+	font-size: 1em;
+	flex: 1;
+	padding:10px;
+	background-color: rgb(236,236,236);
+}
+.ship { /*image*/
+	width:100%;
+	height: 400px;
+    object-fit: cover;
+    border-radius: 5px;
+}
+.shipoverlay {
+	display: flex;
+	width: 100%;
+	position: relative;
+	justify-content: center;
+}
+.shipoverlay button {
+	background-color: rgba(60,60,60,0.4);
+	border-radius: 10px;
+	color: white;
+	bottom: 0;
+	left: 0;
+}
+.shipoverlay button:hover {
+	background-color: white;
+	border-radius: 10px;
+	color: rgb(60,60,60);
+	bottom: 0;
+	left: 0;
+}
+.shipoverlay h1 {
+	color: white;
+	font-size: 2em;
+	padding-left: 10px;
+	width: 100%;
+ 	position: absolute;
+ 	background-color: rgba(60,60,60,0.4);
+ 	text-align:left;
+ 	top: 0;
+}
+.shipoverlay h2 {
+	font-size: 0.75em;
+	border-radius: 5px;
+	padding: 6px;
+	color: white;
+ 	background-color: rgba(60,60,60,0.4);
+
+}
+.shipinfo {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	color: white;
+	font-size: 2em;
+	width: 100%;
+ 	position: absolute;
+ 	background-color: none;
+ 	bottom: 0;
+ 	padding: 20px;
+}
+
+/* The animation code */
+@keyframes lines {
+    from {width:0%;}
+    to {width: 100%;}
+}
+/* The element to apply the animation to */
+hr {
+	animation-fill-mode: forwards;
+    animation-name: lines;
+    animation-duration: 2s;
+}
+
+@media only screen and (max-width: 512px) {
+	#pagewrapper {
+		display: flex;
+		flex-direction: column;
+		flex: 1;
+		margin: 0% 1%;
+		padding-bottom: 10px
+	}
+	body { 
+		font-size: 12px;
+	}
+	p {
+		font-size: 1.5em;
+	}
+	.mobilehidden {	/*hides chosen linkbar when in mobile mode until opened*/
+		transition: opacity 0.2s;
+		-webkit-transition: opacity 0.2s;
+		opacity: 0;
+		visibility: hidden;
+	}
+	.mobilevisible { /*open menu*/
+		visibility: visible;
+		opacity: 1;
+		transition: opacity 0.2s;
+		-webkit-transition: opacity 0.2s;
+	}
+	.transition { /*allows transition property to only be added in mobile mode to stop unwanted behaviour*/
+		transition: opacity 0.2s;
+		-webkit-transition: opacity 0.2s;
+	}
+	#navbar {
+		flex-direction: column;
+		position: relative;
+	}
+	#navblock {
+		justify-content: space-around;
+		align-items: center;
+	}
+	.menuname {
+		margin:0;
+		visibility: visible;
+		pointer-events: all;
+		right: 0;
+		padding-right: 5px;
+		font-size: 1.5em;
+	}
+	.abslink {
+		display: flex;
+		position: relative;
+		width: 100%;
+	}
+	.navbutton {
+		pointer-events: all;
+		opacity: 1;
+		transition: opacity 0.2s;
+		-webkit-transition: opacity 0.2s;
+	}
+	#linkbar {
+		align-items: center;
+		width: 100%;
+		flex-direction: column;
+		position: absolute;
+	}
+	.profileimg {
+		width: 100%;
+		height: 200px;
+		margin: 10px auto;
+	}
+	.imgtemp {
+		width: 100px;
+		height: 100px;
+		margin: 10px auto;
+	}
+	.linkimg {
+		flex:1;
+	}
+	.margintop {
+		margin-top: 10px;
+	}
+	.link {
+		width:100%;
+		font-size: 2em;
+		text-align: center;
+	}
+	#ismobile {
+		display: block;
+	}
+	#isntmobile {
+		display: none;
+	}
+	.rowcolwrapper {
+		display: flex;
+		flex-direction: column;
+	}
+	.elementinfo p {
+		font-size: 1.5em;
+		padding-right: 5%;
+		margin:5px 0px;
+	}
+	.bigheadline{
+		font-size: 4em;
+
+	}
+	.medheadline{
+		font-size: 2.5em;
+
+	}
+	.smallheadline{
+		text-align: center;
+		font-size: 1.25em;
+		width: 100%;
+		background-color: rgb(54,115,172);
+	}
+	.elementwrapper {
+		min-height: 100px;	
+		width:99.9999%;
+	}
+	.ship { /*image*/
+		height: 300px;
+	}
+	.statwrap {
+		flex-direction: column;
+	}
+	.tradewrapper {
+		/*flex-direction: column;*/
+	}
+	.trade {
+		flex:unset;
+		width:49.999%;
+	}
+	.shipwrapper {
+		display: flex;
+		font-size: 1em;
+	}
+	.shipmobile {
+		display: none;
+	}
+	.shipwrapper div {
+		flex: 1;
+		flex-direction: column;
+		display: flex;
+	}		
+}
+
+@media only screen and (max-width: 1000px) and (min-width: 512px) {
+	body { 
+		font-size: 18px;
+	}
+	#pagewrapper {
+		margin: 0% 1%;
+	}
+	#navbar {
+		flex-direction: column;
+	}
+	.bigheadline{
+		font-size: 4em;
+
+	}
+	.medheadline{
+		font-size: 2.5em;
+
+	}
+	.smallheadline{
+		text-align: center;
+		font-size: 1.25em;
+		width: 100%;
+		background-color: rgb(54,115,172);
+	}
+	.elementwrapper {
+		width:49.9999%;
+	}
+}
+
+@media only screen and (min-width: 1440px) {
+	#pagewrapper {
+		margin: 0% 20%;
+	}
+	.ship { /*image*/
+		height: 500px;
+	}
+}
+
+.container {
+	width: 100%;
+}
