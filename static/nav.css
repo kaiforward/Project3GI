@@ -147,6 +147,21 @@ so the menu is hidden to the user, but is still visible to searches/screen reade
 	transition: background-color 0.2s, color 0.2s;
 	-webkit-transition: background-color 0.2s, color 0.2s;
 }
+.mybutton { /*chosen color*/
+	text-align: center;
+	flex:1;
+	font-size: 2rem;
+	width: fit-content;
+	background-color: #d84c4c;
+	color: white;
+	border: solid #d84c4c 2px;
+}
+.mybutton:hover { /*chosen color for hovered links*/
+	background-color: white;
+	color: #d84c4c;
+	transition: background-color 0.2s, color 0.2s;
+	-webkit-transition: background-color 0.2s, color 0.2s;
+}
 .menuname {
 	visibility: hidden;
 	pointer-events: none;
@@ -381,6 +396,9 @@ so the menu is hidden to the user, but is still visible to searches/screen reade
 .color {
 	background-color: rgba(236,236,236,0.9);
 	border-radius: 10px;
+}
+.margin {
+	margin:2px;
 }
 .trade {
 	background-color: unset;

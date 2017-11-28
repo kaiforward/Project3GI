@@ -5,6 +5,16 @@
 
 <p class="smallheadline">{{ company.name }}: You are logged in with {{ user.email }} and your last login was {{ user.last_login }}</p>
 
+{% if messages %}
+    <div class="alert alert-success">
+        <div class="messages">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+
 <div class="container color">
     <!-- define tabs here -->
     <ul class="nav nav-tabs">
@@ -112,12 +122,12 @@
                                 <p>{{ trade.price }}c</p>               
                             </div>
                             <div class="trade"> 
-                                <h3>Date:</h3>
-                                <p>{{ trade.date_created }}</p>               
+                                <h3>Finish Date:</h3>
+                                <p>{{ trade.date_to_finish }}</p>               
                             </div>
                             <div class="trade"> 
-                                <h3>Distance:</h3>
-                                <p>{{ trade.distance }}</p>               
+                                <h3>Status:</h3>
+                                <p>{{ trade.status }}</p>               
                             </div>
                         </div> 
                     </div>           
@@ -126,7 +136,33 @@
         </div>
         <!-- ship tab -->
         <div id="ships" class="tab-pane fade">
-
+            {% for owned in ships %}
+                <div class="shipoverlay">
+                    <h1>{{ owned.ship.ship }}</h1>           
+                    <img src="/media/{{ owned.ship.image }}" class="ship">
+                </div>
+                <div class="shipmobile shipwrapper">
+                    <div class="statwrap">
+                        <div>   
+                            <h2>Ship:</h2>
+                            <p>{{ owned.ship.ship }}</p>
+                        </div>
+                        <div>               
+                            <h2>Fleet Size:</h2>
+                            <p>Total:{{ owned.amount }} In-Use:{{ owned.in_use}}</p>
+                        </div>  
+                        <div>               
+                            <h2>Speed:</h2>
+                            <p>{{ owned.ship.speed }}c</p>
+                        </div>
+                        <div>               
+                            <h2>Storage:</h2>
+                            <p>{{ owned.ship.cargo_space }}z</p>
+                        </div>        
+                    </div>
+                </div>
+                <hr>     
+            {% endfor %}
         </div>
         <!-- mine tab -->
         <div id="mines" class="tab-pane fade">
@@ -138,7 +174,7 @@
             </div>
             {% for owned in mines %}
                 <div class="shipoverlay">
-                    <h1>{{ owned.mine.get_level_display }}</h1>           
+                    <h1>{{ owned.element.name }} {{ owned.mine.get_level_display }}</h1>           
                     <img src="/media/{{ owned.mine.image }}" class="ship">
                 </div>
                 <div class="shipwrapper">
@@ -154,7 +190,11 @@
                         <div>               
                             <h2>Amount:</h2>
                             <p>{{ owned.amount }}</p>
-                        </div>        
+                        </div>
+                        <div>               
+                            <h2>Element:</h2>
+                            <p>{{ owned.element.name }}</p>
+                        </div>          
                     </div>
                     <div>               
                         <h2>Description:</h2>
@@ -169,7 +209,21 @@
             {% endfor %}          
         </div>
         <div id="tutorial" class="tab-pane fade">
-
+            <div class="colwrapper">
+                <h2>Welcome Trader</h2>
+                <p>This is the galactic marketplace, where you can buy and trade raw elements, and start your own mining operations to provide long term profits. The Galaxy needs your materials, go deliver them!</p>
+                <h2>How it works</h2>
+                <p>Companies produce minerals by mining and trading with each other, and sell to planets that need different materials. Planets change every day, what elements they want and what they will pay, so make sure to take advantage of good prices they might not be there tomorrow.</p>
+                <p>Planet prices will go down when you sell to them, as your satisfying their need, if a planets needs are not satisfied, it will normally continue to need and element for longer, and the price will go up.</p>
+                <h2>Trading</h2>
+                <p>If you want to purchase new materials you can go to the marketplace and look at the best offers available. Trades take time, the ship you use will make a difference in how much you can transport, and how fast that is.</p>
+                <h2>Your Elements</h2>
+                <p>You can view your own elements in the element tab on this page, you can see what the average prices are and set yours to be competitive.</p>
+                <h2>Ships</h2>
+                <p>Your own personal transport fleet, go to the upgrades page to check what ships are available, fast ships will make sure you take advantage of price changes when they happpen.</p>
+                <h2>Mining</h2>
+                <p>Go to the upgrades page to view the different mines, and choose an element that you think will do well, it will provide elements on a continuous basis, and you cann see how much by going to the mines tab each time you visit your home page.</p>
+            </div>
         </div>
 <!--         <div id="ships" class="tab-pane fade">
 

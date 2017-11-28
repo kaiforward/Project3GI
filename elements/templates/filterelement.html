@@ -37,8 +37,8 @@
                 <button class="btn CCbutton" onclick="location.href='{% url 'companytrade' companyelement.company.pk companyelement.pk %}'">Purchase</button>
             </div>
         </div>
-        <div class="el border" style="background-color: rgb({{ companyelement.element.color }});">
-            <p> {{ companyelement.amount }}: Units</p>
+        <div class="el" style="background-color: rgb({{ companyelement.element.color }});">
+            <p class="smallheadline"> {{ companyelement.company.name }}</p>
             <p> {{ companyelement.price}}: Credits</p>
             <p> {% find_distance companyelement.company.locationx companyelement.company.locationy companyelement.company.locationz player.locationx player.locationy player.locationz %}: LY</p>
         </div>  

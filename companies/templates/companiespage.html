@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% block content %}
+{% load static %}
 {% load companies_extras %}
 {% for company in companies %}
     <div class="color"> 
@@ -17,11 +18,11 @@
                 <p>{% find_distance company.locationx company.locationy company.locationz player.locationx player.locationy player.locationz %}</p>
         	</div>
         	<div class="colwrapper">
-                {% if company.image %}
-                        <img src="/media/{{ company.image }}" class="profileimg">
-                {% else %}
-                        <img src="http://placehold.it/100" style="width:100px; height: 100px; background-color: #12ABB2; color: #ffffff;" class="img-circle imgtemp">       
-                {% endif %}         
+                    {% if company.image %}
+                            <img src="/media/{{ company.image }}" class="profileimg">
+                    {% else %}
+                            <img src="{% static 'images/mining_facility.jpg' %}" class="profileimg">       
+                    {% endif %}         
                 <h2>Description: </h2>
                 <p class="profiledesc">{{ company.description }}</p>
         	</div>

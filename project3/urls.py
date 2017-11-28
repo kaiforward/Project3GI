@@ -39,7 +39,7 @@ urlpatterns = [
     # Ship Urls
     url(r'^mines/', include('mining.urls')),
     # MarketPlace Urls
-    # url(r'^marketplace/', include(' marketplace.urls')),
+    url(r'^marketplace/', include('marketplace.urls')),
     # # Images Urls
     url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
 ]

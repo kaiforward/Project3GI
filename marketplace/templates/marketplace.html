@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+{% if messages %}
+    <div class="alert alert-success">
+        <div class="messages">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
+<div class="bigheadline">
+	MARKETPLACE
+</div>
+<div class="CC rowwrapper">
+    <a href="{% url 'elements' %}" class="mybutton">Elements</a> 
+    <a href="{% url 'allcompanies' %}" class="mybutton">Traders</a>
+    <a href="{% url 'tradelist' %}" class="mybutton">Recent Trades</a>
+</div>
+
+<div class="colwrapper color">
+    {% for rich in richest %}
+    <p> {{ rich.money }}</p>
+    {% endfor %}
+</div>
+
+{% endblock %}

@@ -23,7 +23,7 @@ def mine_detail(request, mine_pk):
 			player = request.user.company
 			owned_mine = form.save(commit=False)
 			if owned_mine.amount > 0: # amount must be above zero	        
-				if owned_mine.amount * mine.price < player.money:	         
+				if owned_mine.amount * mine.price <= player.money:	         
 					try: # find player mines of same type, if already exist, add another to amount of mines.
 						player_mine = get_object_or_404(MineOwnership, element=owned_mine.element, owner=request.user.company, mine=mine)         
 						sale = MineOwnership.objects.add_mine(owned_mine.amount, owned_mine.element, mine, request.user.company)   

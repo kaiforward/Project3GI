@@ -26,18 +26,20 @@
     <div class="abslink">
         <div id="linkbar" class="CC mobilehidden">
             <a href="" class="linkimg"></a>
-            <a href="/" class="link CClink">Home</a>      
+      
             {% if user.is_active %}
-                <a href="{% url 'logout' %}" class="link CClink">Log Out</a>
                 <a href="{% url 'company' %}" class="link CClink">Company</a>
-                <a href="{% url 'elements' %}" class="link CClink">Elements</a> 
+<!--                 <a href="{% url 'elements' %}" class="link CClink">Elements</a> 
                 <a href="{% url 'allcompanies' %}" class="link CClink">Traders</a>
-                <a href="{% url 'tradelist' %}" class="link CClink">Trade List</a>
+                <a href="{% url 'tradelist' %}" class="link CClink">Trade List</a> -->
+                <a href="{% url 'marketplace' %}" class="link CClink">Marketplace</a>
                 <a href="{% url 'shipsall' %}" class="link CClink">Ships</a>
-                <a href="{% url 'minesall' %}" class="link CClink">Mines</a>                 
+                <a href="{% url 'minesall' %}" class="link CClink">Mines</a>  
+                <a href="{% url 'logout' %}" class="link CClink">Log Out</a>               
             {% else %}
-              <a href="{% url 'register' %}" class="link CClink">Register</a>
-              <a href="{% url 'login' %}" class="link CClink">Log In</a>
+                <a href="/" class="link CClink">Home</a>
+                <a href="{% url 'register' %}" class="link CClink">Register</a>
+                <a href="{% url 'login' %}" class="link CClink">Log In</a>                
             {% endif %}
         </div>
     </div>

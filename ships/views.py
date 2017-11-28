@@ -23,7 +23,7 @@ def ship_detail(request, ship_pk):
 			player = request.user.company
 			owned_ship = form.save(commit=False)
 			if owned_ship.amount > 0: # amount must be above zero
-				if owned_ship.amount * ship.price < player.money:
+				if owned_ship.amount * ship.price <= player.money:
 				# refresh user mining so checked date is correct for new mines. 
 					try: # find player mines of same type, if already exist, add another to amount of mines.
 						player_ship = get_object_or_404(Ownership, owner=request.user.company, ship=ship)         

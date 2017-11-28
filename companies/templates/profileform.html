@@ -4,7 +4,8 @@
         <div class="colwrapper color">
                 <p>You are logged in as {{ user.email }} and your last login was {{ user.last_login }}</p>
                 
-                <h1>Now Choose your Company Details!</h1>
+                <h2>Now Choose your Company Details!</h2>
+                <p>Once you have created your company details, you will be given your first ship and a small mine to get you started.</p>
                 <form method="POST" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form | as_bootstrap}}
