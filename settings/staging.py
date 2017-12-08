@@ -21,8 +21,8 @@ SITE_URL = 'http://127.0.0.1:8000'
 PAYPAL_NOTIFY_URL = 'http://127.0.0.1/a-very-hard-to-guess-url/'
 PAYPAL_RECEIVER_EMAIL = 'kaiforward123-facilitator@gmail.com'
  
-SITE_URL = 'https://your-heroku-app.herokuapp.com'
-ALLOWED_HOSTS.append('your-heroku-app.herokuapp.com')
+SITE_URL = 'https://the-galactic-index.herokuapp.com'
+ALLOWED_HOSTS.append('the-galactic-index.herokuapp.com')
  
 # Log DEBUG information to the console
 LOGGING = {
