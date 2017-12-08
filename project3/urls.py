@@ -16,7 +16,7 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 from django.views.static import serve
-from settings.settings import MEDIA_ROOT
+from settings.staging import MEDIA_ROOT
 from accounts import views as accounts_views
 from home import views as home_views
 from paypal.standard.ipn import urls as paypal_urls
