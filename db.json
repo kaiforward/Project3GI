@@ -285,7 +285,7 @@
         "description": "Bender Bending Rodriguez!",
         "image": "images/Bender_Rodriguez.png",
         "planets": "TR",
-        "last_checked": "2017-12-08T14:25:20.910Z"
+        "last_checked": "2017-12-08T15:30:26.943Z"
     }
 },
 {
@@ -694,7 +694,7 @@
     "fields": {
         "company": 49,
         "element": 1,
-        "amount": 1,
+        "amount": 13,
         "price": 98
     }
 },
