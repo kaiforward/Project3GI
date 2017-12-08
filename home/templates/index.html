@@ -1,34 +1,22 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-{% if messages %}
-    <div class="alert alert-success">
-        <div class="messages">
-            {% for message in messages %}
-                {{ message }}
-            {% endfor %}
-        </div>
-    </div>
-{% endif %}
 <div class="bigheadline">
 	WELCOME TRADER
 </div>
 <div class="homewrapper">
-	<img src="{% static 'images/a.jpg' %}">
+<!-- 	<img src="{% static 'images/a.jpg' %}"> -->
 	{% if user.is_active %}
-	<div class="abs home">
-		<p class="abs">The galactic index is the place to trade, compete and ally with other merchants from all across the local group.</p>
-		<h1 class="abs">Head to your company profile to see how you've been doing!</h1>
+	<div class="home">
+		<p>Start your very own Intergalactic Trading Empire.</p>
 		<button type="submit" class="abs btn CCbutton" onclick="location.href='/company/profile'">Company Page</button>	
 	</div>	
 	{% else %}
-	<div class="abs home">
-		<p class="abs">The galactic index is the place to trade, compete and ally with other merchants from all across the local group.</p>
-		<h1 class="abs">Name your company now and begin trading!</h1>
-		<button type="submit" class="abs btn CCbutton" onclick="location.href='/register'">Register</button>	
+	<div class="home">
+		<p>Start your very own Intergalactic Trading Empire.</p>
+		<button type="submit" class="btn CCbutton" onclick="location.href='/register'">Register</button	
 	</div>
 	{% endif %}
-
 </div>
 
 {% endblock %}

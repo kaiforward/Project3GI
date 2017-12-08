@@ -9,11 +9,12 @@ def find_distance(x, y, z, x2, y2, z2, *args, **kwargs):
 	distance = round(distance, 2)
 	return distance
 
-@register.simple_tag # show player fuel cost for trade
-def fuel_cost(distance, amount, *args, **kwargs):
-	cost = (distance / 5000) * amount
-	cost = round(cost)
-	return cost
+# dont need this probably
+# @register.simple_tag # show player fuel cost for trade
+# def fuel_cost(distance, amount, *args, **kwargs):
+# 	cost = (distance / 5000) * amount
+# 	cost = round(cost)
+# 	return cost
 
 @register.simple_tag
 def readable_int(number, *args, **kwargs):

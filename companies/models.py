@@ -4,13 +4,15 @@ from __future__ import unicode_literals
 from django.db import models
 from django.conf import settings
 from django.utils import timezone
+from django.forms import ModelForm
+from datetime import datetime, timedelta
 import random, math
 from accounts.models import User
 from elements.models import Element
 from ships.models import Spaceship
-from mining.models import Mine
-from django.forms import ModelForm
-from datetime import datetime, timedelta
+from mining.models import Mine, Upgrade
+from planets.models import Planet
+
 
 # Planet types for selection
 CONTINENTAL = 'CN'
@@ -49,8 +51,8 @@ class StorageManager(models.Manager):
 		company_element = self.create(
 			company=company_id,
 			element=element_id,
-			price= random.randint(1, 100),
-			amount=random.randint(1, 300),
+			price= random.randint(50, 200),
+			amount=random.randint(1, 50),
 		)
 		company_element.save()			
 		return company_element	
@@ -100,9 +102,8 @@ class Ownership(models.Model):
 
 class MineManager(models.Manager):
 
-	def mine_elements(self, user):
+	def mine_elements(self, company):
 		# This add Elements to a company over time.
-		company = user.company
 		owned_mines = MineOwnership.objects.filter(owner=company)
 		# get time difference between last time user is on profile screen
 		time_multiplier = timezone.now() - company.last_checked 
@@ -112,11 +113,12 @@ class MineManager(models.Manager):
 
 		for owned in owned_mines: # iterate through all owned mines.
 			mine = owned.mine # type of mine
-			company_mineral = CompanyStorage.objects.filter(element=owned.element)[0]
+			# target specific company storage of one element
+			company_mineral = CompanyStorage.objects.filter(element=owned.element, company=company)[0]
 			# add minerals based on time that has passed			
 			mineral_added = (mine.production * mine.mine_size_mod * owned.amount) * time_in_hours
 			mineral_added = round(mineral_added) # round to int as minerals only in ints
-			if mineral_added > 0:	
+			if mineral_added > 0: # wait until enough time has passed for 1 to be created before resetting.	
 				company_mineral.amount += mineral_added # add minerals to company
 				company_mineral.save() # save result
 				new_mineral = (mine.mine_size, owned.amount, company_mineral.element.name, mineral_added)			
@@ -148,6 +150,7 @@ class MineOwnership(models.Model):
 	mine = models.ForeignKey(Mine, on_delete=models.CASCADE)
 	element = models.ForeignKey(Element, on_delete=models.CASCADE)
 	amount = models.IntegerField()
+	upgrade = models.ForeignKey(Upgrade, on_delete=models.CASCADE, blank=True, null=True)
 
 	objects = MineManager()
 
@@ -172,7 +175,7 @@ class TradeManager(models.Manager):
 		z2 = seller.locationz
 		distance = math.sqrt((x-x2)*(x-x2) + (y-y2)*(y-y2) + (z-z2)*(z-z2))
 		# work out fuel cost from distance
-		fuel_cost = distance / 5000 * amount
+		fuel_cost = distance / 100 * amount
 		round(fuel_cost)
 		price = amount * company_element.price + fuel_cost
 		# make a new trade
@@ -231,6 +234,82 @@ class CompanyTrade(models.Model):
 	ship = models.ForeignKey(Ownership, on_delete=models.CASCADE)
 
 	objects = TradeManager()
+
+	def __unicode__(self):
+		return self.buyer.name + ' - ' + self.seller.name
+
+class PlanetTradeManager(models.Manager):
+	def planet_trade(self, seller, planet_element, amount, buyer, owned_ship):
+
+		owned_ship.in_use += 1
+		owned_ship.save()
+		seller_storage = CompanyStorage.objects.filter(company=seller, element=planet_element.element)
+		seller_storage = seller_storage[0]
+
+		# locations/distance calculations for traders
+		x = buyer.locationx
+		x2 = seller.locationx
+		y = buyer.locationy
+		y2 = seller.locationy
+		z = buyer.locationz
+		z2 = seller.locationz
+		distance = math.sqrt((x-x2)*(x-x2) + (y-y2)*(y-y2) + (z-z2)*(z-z2))
+		# work out fuel cost from distance
+		fuel_cost = distance / 100 * amount
+		round(fuel_cost)
+		price = amount * planet_element.price - fuel_cost
+		# make a new trade
+		trade = self.create(
+			buyer=buyer,
+			seller=seller,
+			element=planet_element.element,
+			amount=amount,
+			price=price,
+			distance=distance,
+			status='Pending',
+			ship=owned_ship,
+		)
+		# find out when trade will finish
+		ship_speed_multiplier = distance / owned_ship.ship.speed
+		now = trade.date_created
+		trade_finish_date = trade.date_created + timedelta(seconds=ship_speed_multiplier)
+		trade.date_to_finish = trade_finish_date
+		trade.save()
+
+		planet_element.price -= round(amount / random.randint(9, 18))
+		planet_element.save()
+		seller.money += price		
+		seller.save()
+		seller_storage.amount -= amount
+		seller_storage.save()				
+		return trade
+
+	def check_planet_trade_status(self, company):
+		planet_trades = PlanetTrade.objects.filter(seller=company, status='Pending')
+
+		for trade in planet_trades:
+			if timezone.now() >= trade.date_to_finish:
+					trade.ship.in_use -= 1
+					if trade.ship.in_use < 0:
+						trade.ship.in_use = 0
+					trade.ship.save()
+					trade.status = 'Completed'
+					trade.save()
+
+class PlanetTrade(models.Model):
+
+	buyer = models.ForeignKey(Planet, on_delete=models.CASCADE, related_name='planet_buyer_trade')
+	seller = models.ForeignKey(Company, on_delete=models.CASCADE, related_name='planet_seller_trade')
+	element = models.ForeignKey(Element, on_delete=models.CASCADE)
+	amount = models.IntegerField()
+	price = models.IntegerField()
+	distance = models.IntegerField()
+	date_created = models.DateTimeField(auto_now_add=True)
+	date_to_finish = models.DateTimeField(auto_now_add=True)
+	status = models.CharField(max_length=50)
+	ship = models.ForeignKey(Ownership, on_delete=models.CASCADE)
+
+	objects = PlanetTradeManager()
 
 	def __unicode__(self):
 		return self.buyer.name + ' - ' + self.seller.name

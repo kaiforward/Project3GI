@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load companies_extras %}
+{% block content %}
+<h1 class="bigheadline"> PLANET INFO </h1>
+<hr>
+<div class="rowcolwrapper">
+    <div class="colwrapper CC">
+        <h2>PLANET NAME</h2>
+        <p class="borderbottom"> {{ planet.name }} </p>
+        <h2>PLANET TYPE</h2>
+        <p class="borderbottom"> {{ planet.planet_type.name }} </p>
+        <h2>LOCATION</h2>
+        <p class="borderbottom"> {{ planet.locationx }}, {{ planet.locationy }}, {{ planet.locationz }}</p>
+        <!-- find company distance     -->
+        {% find_distance planet.locationx planet.locationy planet.locationz player.locationx player.locationy player.locationz as the_distance %}
+        <h2>Distance:</h2>
+        <p class="borderbottom"> <span id="distance">{{ the_distance }}</span>: LY</p> 
+    </div>
+    <div class="colwrapper CC">
+        <img src="/media/{{ planet.planet_type.image }}" class="planetimg">
+        <p> {{ planet.planet_type.description }} </p>
+    </div>
+</div>
+
+<hr>
+
+<div class=" rowwrapper">
+{% for planetelement in planetelements %}
+<div class="rowcolwrapper elementwrapper rel color">
+        <div class="colwrapper borderbottom" style="background-color: rgba({{planetelement.element.color}},0.2);">
+            <div class="elementinfo borderbottom">   
+                <p>Planet:</p>
+                <p>{{ planetelement.planet.name }}</p>
+            </div>
+            <div class="elementinfo borderbottom">   
+                <p>Element:</p>
+                <p>{{ planetelement.element.name }}</p>
+            </div>
+            <div class="elementinfo borderbottom">               
+                <p>Weight:</p>
+                <p>{{ planetelement.element.weight }}u</p>
+            </div>         
+            <div class="elementinfo borderbottom"> 
+                <p>Price:</p>
+                <p>{{ planetelement.price }} Glorks</p>               
+            </div>
+            <div class="elementinfo borderbottom"> 
+                <p>Amount:</p>
+                <p>{{ planetelement.amount }} Mt's</p>               
+            </div>
+            <div class="elementinfo"> 
+                <p>Sell Stock:</p>
+                <button class="btn CCbutton" onclick="location.href='{% url 'planettrade' planetelement.planet.pk planetelement.pk %}'">Sell</button>
+            </div>
+        </div>
+        <div class="el borderbottom" style="background-color: rgb({{ planetelement.element.color }});">
+            <div>
+                <h1> {{ planetelement.element.tag.0 }} </h1>
+                <h2> {{ planetelement.element.tag.1 }} </h2>
+                <h1> {{ planetelement.element.tag.2}} </h1>
+            </div>
+            <p> {{ planetelement.element.name}} </p>
+        </div> 
+</div>          
+{% endfor %}
+</div>
+{% endblock %}

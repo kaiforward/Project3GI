@@ -3,6 +3,11 @@
 <h2 class="medheadline">
    THE ELEMENT MARKETPLACE
 </h2>
+<hr>
+<!-- {% for average in planet_averages %}
+<p> {{ average.avg_price }} </p>
+<p> {{ average.element_name }} </p>
+{% endfor %} -->
 <div class=" rowwrapper">
 {% for element in elements %}
 <div class="rowcolwrapper elementwrapper rel color">
@@ -17,7 +22,8 @@
             </div>         
             <div class="elementinfo"> 
                 <p>Buy Stock:</p>
-                <button class="btn CCbutton" onclick="location.href='{% url 'filterelement' element.pk %}'">View Prices</button>
+                <button class="btn CCbutton" onclick="location.href='{% url 'filterelement' element.pk %}'">Buy</button>
+                <button class="btn CCbutton" onclick="location.href='{% url 'planetprices' element.pk %}'">Sell</button>
             </div>
         </div>
         <div class="el borderbottom" style="background-color: rgb({{ element.color }});">

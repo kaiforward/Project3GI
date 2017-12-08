@@ -19,12 +19,14 @@ from django.views.static import serve
 from .settings import MEDIA_ROOT
 from accounts import views as accounts_views
 from home import views as home_views
+from paypal.standard.ipn import urls as paypal_urls
+from paypal_store import views as paypal_views
 
 urlpatterns = [
     # Admin
 	url(r'^admin/', admin.site.urls),
     # HomePage
-	url(r'^$', home_views.get_index, name='index'),
+	url(r'^$', home_views.home_view, name='index'),
     # Authentication
 	url(r'^register/$', accounts_views.register, name='register'),
     url(r'^profile/$', accounts_views.profile, name='profile'),
@@ -40,6 +42,14 @@ urlpatterns = [
     url(r'^mines/', include('mining.urls')),
     # MarketPlace Urls
     url(r'^marketplace/', include('marketplace.urls')),
+    # Planet Urls
+    url(r'^planets/', include('planets.urls')),
+    # tinymce
+    url(r'^tinymce/', include('tinymce.urls')),
     # # Images Urls
     url(r'^media/(?P<path>.*)$', serve, {'document_root': MEDIA_ROOT}),
+    # Paypal
+    url(r'^a-very-hard-to-guess-url/', include(paypal_urls)),
+    url(r'^paypal-return', paypal_views.paypal_return),
+    url(r'^paypal-cancel', paypal_views.paypal_cancel),
 ]

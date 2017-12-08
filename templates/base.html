@@ -8,15 +8,19 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <link href="https://fonts.googleapis.com/css?family=Josefin+Sans:300,400" rel="stylesheet">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js">
     <link rel="stylesheet" type="text/css" href="{% static 'nav.css' %}">
+    {% block head_js %}{% endblock %}
 </head>
 
 <body>
-<img src="{% static 'images/a.jpg' %}" class="abs backgroundimg">
+<div id="backgrounddiv">
+<!-- <img src="{% static 'images/a.jpg' %}" class="abs backgroundimg"> -->
+</div>
 <div id="navbar" class="CC">
     <div id="navblock">
-      <h1 id="navtitle" class="CC">Galactic Index</h1>
+      <h1 id="navtitle" class="CC"><a href="/">Galactic Index</a></h1>
       <p class="menuname">more</p>
       <div class="navbutton CClink" tabindex="0">
             <i class=" fa fa-angle-double-down fadein" aria-hidden="true"></i>
@@ -29,9 +33,6 @@
       
             {% if user.is_active %}
                 <a href="{% url 'company' %}" class="link CClink">Company</a>
-<!--                 <a href="{% url 'elements' %}" class="link CClink">Elements</a> 
-                <a href="{% url 'allcompanies' %}" class="link CClink">Traders</a>
-                <a href="{% url 'tradelist' %}" class="link CClink">Trade List</a> -->
                 <a href="{% url 'marketplace' %}" class="link CClink">Marketplace</a>
                 <a href="{% url 'shipsall' %}" class="link CClink">Ships</a>
                 <a href="{% url 'minesall' %}" class="link CClink">Mines</a>  
@@ -45,26 +46,26 @@
     </div>
 </div>
 <div id="pagewrapper" class="pageout">
+{% if messages %}
+    <div class="alert alert-success">
+        <div class="messages">
+            {% for message in messages %}
+                {{ message }}
+            {% endfor %}
+        </div>
+    </div>
+{% endif %}
 <!-- blocks are used to contain elements from other html files in django -->
     {% block content %} 
     {% endblock %}
-</div>
-<hr>
-<div class="colwrapper color">
-    <div class="footer ">
-        <p>MORE LINKS!</p>
-    </div>
-
-</div>
-<hr>
 </div>
 <div id="ismobile"></div>
 <div id="isntmobile"></div>
 </body>
 <!-- script references -->
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
 <script src="https://use.fontawesome.com/ed33889719.js"></script>
-<script src="{% static 'nav.js' %}"></script>  
-<script src="{% static 'trade.js' %}"></script>
+<script src="{% static 'js/nav.js' %}"></script>  
+<script src="{% static 'js/main.js' %}"></script>
 </html>

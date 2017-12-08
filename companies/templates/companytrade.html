@@ -1,5 +1,4 @@
 {% extends "base.html" %}
-{% include "trade.js" %}
 {% load bootstrap_tags %}
 {% load companies_extras %}
 {% block content %}
@@ -7,37 +6,43 @@
     <div class="colwrapper color">  
             <div class="colwrapper" style="background-color: rgba({{companyelement.element.color}},0.2);">
                 <div class="elementinfo borderbottom">     
-                        <p>Element:</p>
-                        <p>{{ companyelement.element.name }}</p>
-                    </div>
-                    <div class="elementinfo borderbottom">               
-                        <p>Weight:</p>
-                        <p>{{ companyelement.element.weight }}u</p>
-                    </div>         
-                    <div class="elementinfo borderbottom"> 
-                        <p>Price:</p>
-                        <p ><span id="pricecheck">{{ companyelement.price }}</span> Glorks</p>               
-                    </div>
-                    <div class="elementinfo borderbottom"> 
-                        <p>Amount:</p>
-                        <p>{{ companyelement.amount }} Mt's</p>               
-                    </div>
-            </div>
-            <div class="colwrapper" style="background-color: rgba({{companyelement.element.color}},0.2);">
+                    <p>Trader:</p>
+                    <p>{{ companyelement.company.name }}</p>
+                </div>
                 <div class="elementinfo borderbottom">     
-                        <p>Average Price:</p>
-                        <p>{{ average }}</p>
-                </div> 
+                    <p>Element:</p>
+                    <p>{{ companyelement.element.name }}</p>
+                </div>       
+                <div class="elementinfo borderbottom"> 
+                    <p>Seller Amount:</p>
+                    <p>{{ companyelement.amount }} Mt's</p>               
+                </div>
+                <div class="elementinfo borderbottom"> 
+                    <p>Your Amount:</p>
+                    <p>{{ playerelement.amount }} Mt's</p>               
+                </div>
+                <div class="elementinfo borderbottom"> 
+                    <p>Price:</p>
+                    <p ><span id="pricecheck">{{ companyelement.price }}</span> Glorks</p>               
+                </div>                           
+                <div class="elementinfo borderbottom">     
+                        <p>Average Sell Price:</p>
+                        <p>{{ company_average }} Glorks</p>
+                </div>
+                <div class="elementinfo borderbottom">     
+                        <p>Average Planet Buy Price:</p>
+                        <p>{{ planet_average }} Glorks</p>
+                </div>  
                 <div class="elementinfo borderbottom">
-                        <!-- find company distance     -->
-                        {% find_distance companyelement.company.locationx companyelement.company.locationy companyelement.company.locationz player.locationx player.locationy player.locationz as the_distance %}
-                        <p>Distance:</p>
-                        <p> <span id="distance">{{ the_distance }}</span>: LY</p>
-                        <p>Fuel cost for full inventory:</p>
-                        <p>{% fuel_cost the_distance companyelement.amount %}C</p>
-                </div>         
-            </div>           
-        <h1>How many do you want to buy?</h1>
+                    <!-- find company distance function is inside companies_extras.py-->
+                    {% find_distance companyelement.company.locationx companyelement.company.locationy companyelement.company.locationz player.locationx player.locationy player.locationz as the_distance %}
+                    <p>Distance:</p>
+                    <p> <span id="distance">{{ the_distance }}</span>: LY</p>
+                </div>
+            </div>                     
+        <h3>How many do you want to buy?</h3>
+        <h3 class="medheadline">Your Money:</h3>
+        <h3 class="bottomborder">{% readable_int playerelement.company.money %} Glorks</h3>
         <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form | as_bootstrap}}                

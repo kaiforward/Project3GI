@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="bigheadline">
+   Local-group News
+</h2>
+<hr>
+<div class="rowcolwrapper">
+    <div class="colwrapper CC">
+        <h3 class="borderbottom">{{story.headline}}</h3>
+        <p class="borderbottom"> {{ story.article }} </p>
+    </div>
+    <div class="colwrapper CC"> 
+        <img src="/media/{{ story.image }}" class="planetimg" style="height: 500px;">
+    </div>
+</div>
+<hr>
+{% endblock %}

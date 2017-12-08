@@ -17,9 +17,10 @@ def ships_all(request):
 @login_required(login_url='/login/')
 def ship_detail(request, ship_pk):
 	ship = get_object_or_404(Spaceship, pk=ship_pk)
+	player = request.user.company
 	if request.method == "POST":            
 		form = ShipForm(request.POST, request.FILES)
-		if form.is_valid():
+		if form.is_valid():			
 			player = request.user.company
 			owned_ship = form.save(commit=False)
 			if owned_ship.amount > 0: # amount must be above zero
@@ -27,11 +28,13 @@ def ship_detail(request, ship_pk):
 				# refresh user mining so checked date is correct for new mines. 
 					try: # find player mines of same type, if already exist, add another to amount of mines.
 						player_ship = get_object_or_404(Ownership, owner=request.user.company, ship=ship)         
-						sale = Ownership.objects.add_ship(owned_ship.amount, ship, request.user.company)   
+						sale = Ownership.objects.add_ship(owned_ship.amount, ship, request.user.company) 
+						messages.success(request, 'Thank you for your purchase! You can view your purchase on your company profile page.')  
 						return redirect(ships_all)
 					except: # if player mines not already exists, create empty one, then add amount.
 						new_ship = Ownership.objects.create_ship(ship, request.user.company)
 						sale = Ownership.objects.add_ship(owned_ship.amount, ship, request.user.company)
+						messages.success(request, 'Thank you for your purchase! You can view your purchase on your company profile page.')
 						return redirect(ships_all)		        	
 				else:    
 					messages.error(request, 'You cannot afford this Trade.')
@@ -39,4 +42,4 @@ def ship_detail(request, ship_pk):
 				messages.error(request, 'You must choose at least one')
 	else:		   
 		form = ShipForm()
-	return render(request, "shipdetail.html", {'ship': ship, 'form': form})
+	return render(request, "shipdetail.html", {'ship': ship, 'form': form, 'player': player})

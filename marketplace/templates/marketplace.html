@@ -1,28 +1,98 @@
 {% extends 'base.html' %}
 {% load static %}
 {% block content %}
-{% if messages %}
-    <div class="alert alert-success">
-        <div class="messages">
-            {% for message in messages %}
-                {{ message }}
-            {% endfor %}
-        </div>
-    </div>
-{% endif %}
+
 <div class="bigheadline">
-	MARKETPLACE
+	MARKET PLACE
 </div>
 <div class="CC rowwrapper">
     <a href="{% url 'elements' %}" class="mybutton">Elements</a> 
     <a href="{% url 'allcompanies' %}" class="mybutton">Traders</a>
-    <a href="{% url 'tradelist' %}" class="mybutton">Recent Trades</a>
+    <a href="{% url 'planets' %}" class="mybutton">Planets</a>
+    <a href="{% url 'tradelist' %}" class="mybutton">Recent Trades</a>    
+</div>
+<hr>
+<h2 class="medheadline">RECENT NEWS</h2>
+<div class="rowcolwrapper CC">
+    <div class="colwrapper">    
+        <h2 class="borderbottom">{{ story.headline }}</h2>
+        <p>
+        {{ story.article|truncatewords:50 }} 
+        <button class="btn CCbutton whiteborder" onclick="location.href='{% url 'storydetail' story.pk %}'">More</button>
+        </p>
+        <img src="/media/{{ story.image }}" class="profileimg">
+    </div>
+    <div class="colwrapper">
+        <h2>Top Traders</h2>
+        {% for rich in richest %}
+        <h2 class="smallheadline">{{ rich.name }}</h2>
+        <p class="toplistitem">{{ rich.money }} Glorks</p>
+        {% endfor %}
+    </div>    
 </div>
 
-<div class="colwrapper color">
-    {% for rich in richest %}
-    <p> {{ rich.money }}</p>
-    {% endfor %}
+<hr>
+
+<h2 class="medheadline">TOP RANKINGS</h2>
+<div class="rowcolwrapper CC">
+    <div class="colwrapper">
+        <h2>Highest Prices</h2>
+        {% for high in highest %}
+        <h2 class="smallheadline"> {{ high.element.name }}</h2>
+        <div class="rowwrapper" style="background-color: rgb({{ high.element.color }});">
+            <p class="toplistitem">Price: {{ high.price }}</p>
+            <p class="toplistitem">Rarity: {{ high.element.rarity }}</p>
+        </div>
+        {% endfor %}        
+    </div>
+    <div class="colwrapper">
+        <h2>Lowest Prices</h2>
+        {% for cheap in cheapest %}
+        <h2 class="smallheadline"> {{ cheap.element.name }}</h2>
+        <div class="rowwrapper" style="background-color: rgb({{ cheap.element.color }});">
+            <p class="toplistitem">Price: {{ cheap.price }}</p>
+            <p class="toplistitem">Rarity: {{ cheap.element.rarity }}</p>
+        </div>
+        {% endfor %}        
+    </div>
 </div>
 
+<hr>
+
+<h2 class="medheadline">Most Recent Trade</h2>
+{% for trade in trade %}
+    <div class="color">
+        <div class="tradewrapper borderbottom"  style="background-color: rgba({{trade.element.color}},0.2);">
+            <div class="trade">   
+                <h3>Element:</h3>
+                <p>{{ trade.element.name }}</p>
+            </div>
+            <div class="trade">               
+                <h3>Buyer:</h3>
+                <p>{{ trade.buyer.name }}</p>
+            </div>         
+            <div class="trade"> 
+                <h3>Merchant:</h3>
+                <p>{{ trade.seller.name }}</p>               
+            </div>
+            <div class="trade"> 
+                <h3>Amount:</h3>
+                <p>{{ trade.amount }}z</p>               
+            </div>
+            <div class="trade"> 
+                <h3>Price Paid:</h3>
+                <p>{{ trade.price }}c</p>               
+            </div>
+            <div class="trade"> 
+                <h3>Finish Date:</h3>
+                <p>{{ trade.date_to_finish }}</p>               
+            </div>
+            <div class="trade"> 
+                <h3>Status:</h3>
+                <p>{{ trade.status }}</p>               
+            </div>
+        </div> 
+    </div>          
+{% endfor %}
+<hr>
 {% endblock %}

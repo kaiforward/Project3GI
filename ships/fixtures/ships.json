@@ -1,0 +1,128 @@
+[
+{
+    "model": "ships.spaceship",
+    "pk": 1,
+    "fields": {
+        "manufacturer": "ZS",
+        "ship": "Cargo-Glork Mk.I",
+        "description": "The Cargo-Glork is seen all around the system and is probably the most common small freighter, it's two front compartments capable of moving 100z in one trip. It makes up for in speed what it lacks in transport capacity.",
+        "speed": 8,
+        "price": 4500,
+        "cargo_space": 100,
+        "image": "images/ship4.jpg",
+        "real_price": 0
+    }
+},
+{
+    "model": "ships.spaceship",
+    "pk": 2,
+    "fields": {
+        "manufacturer": "CL",
+        "ship": "Clarke Labs Odyssey",
+        "description": "The Hauler is a well known large capacity craft, expensive but capable of holding more than most vessels at the same price.",
+        "speed": 2,
+        "price": 1000000,
+        "cargo_space": 5000,
+        "image": "images/ship_AQvOulo.jpg",
+        "real_price": 0
+    }
+},
+{
+    "model": "ships.spaceship",
+    "pk": 3,
+    "fields": {
+        "manufacturer": "CL",
+        "ship": "Shard Vx313",
+        "description": "The shard is capable of moving large amounts of cargo very quickly, but is mainly used as a luxury transport craft to take wealthy galactic tourist's to the far reaches of space.",
+        "speed": 4,
+        "price": 700000,
+        "cargo_space": 3000,
+        "image": "images/ship5.jpg",
+        "real_price": 0
+    }
+},
+{
+    "model": "ships.spaceship",
+    "pk": 4,
+    "fields": {
+        "manufacturer": "F",
+        "ship": "Daneel-R",
+        "description": "Featuring the first Humanoid A.I interface system, in the Daneel-R, this ship will fly itself without a crew and keep the passengers entertained on route.",
+        "speed": 5,
+        "price": 900000,
+        "cargo_space": 5000,
+        "image": "images/Daneel-R.jpg",
+        "real_price": 0
+    }
+},
+{
+    "model": "ships.spaceship",
+    "pk": 5,
+    "fields": {
+        "manufacturer": "F",
+        "ship": "Mosquito",
+        "description": "The smallest, fastest ship that carry just enough to keep it working as trade vessel. Favoured by many of  the speed junkie pilots taking necessary materials to distant outpost's, the mosquito has to be careful around worlds surrounded by debris, its body isn't designed for difficult surface landings, and even the speed freaks prefer to touchdown at an orbital station.",
+        "speed": 30,
+        "price": 10000,
+        "cargo_space": 50,
+        "image": "images/ship10.jpg",
+        "real_price": 0
+    }
+},
+{
+    "model": "ships.spaceship",
+    "pk": 6,
+    "fields": {
+        "manufacturer": "F",
+        "ship": "Lance",
+        "description": "The Lance is the predecessor to the Daneel-R,  capable of mving much faster due to it's lighter design but with almost as much space. Its so widely used you can find the Lance anywhere from Zorg bleta VII to the outer bubble.",
+        "speed": 10,
+        "price": 450000,
+        "cargo_space": 2000,
+        "image": "images/ship9.jpg",
+        "real_price": 0
+    }
+},
+{
+    "model": "ships.spaceship",
+    "pk": 7,
+    "fields": {
+        "manufacturer": "CL",
+        "ship": "Pebble",
+        "description": "Clarke labs while often manufacturing larger vessels has recently revealed the pebble, their new small size trader, not the fastest small ship available it can carry plenty and as usual the design is robust and capable of planetary landings on all but the most hostile planets.",
+        "speed": 6,
+        "price": 12000,
+        "cargo_space": 1000,
+        "image": "images/ship7.jpg",
+        "real_price": 0
+    }
+},
+{
+    "model": "ships.spaceship",
+    "pk": 8,
+    "fields": {
+        "manufacturer": "CL",
+        "ship": "Glork Hauler",
+        "description": "The glork hauler is a huge ship, unlike their smaller counterparts, they are not fast, but they are cheap and they move mountains.",
+        "speed": 3,
+        "price": 200000,
+        "cargo_space": 6000,
+        "image": "images/ship8.jpg",
+        "real_price": 0
+    }
+},
+{
+    "model": "ships.spaceship",
+    "pk": 9,
+    "fields": {
+        "manufacturer": "ZS",
+        "ship": "Glork Titan",
+        "description": "The Glork Titan is one of the largest ships around, still relatively cheap thanks to Zorg shipyards excellent sourcing of materials, it's a world feeder, and can change the economy of a planet with one drop-off.",
+        "speed": 3,
+        "price": 800000,
+        "cargo_space": 15000,
+        "image": "images/ship11.jpg",
+        "real_price": 0
+    }
+}
+]

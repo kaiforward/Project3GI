@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% load bootstrap_tags %}
 {% block content %}
+    <!-- PLAYER CHOOSE NEW PRICE FOR OWN ELEMENT PAGE -->
     <div class="colwrapper color">	
             <div class="colwrapper borderbottom" style="background-color: rgba({{companyelement.element.color}},0.2);">
                 <div class="elementinfo borderbottom">     
@@ -16,14 +17,14 @@
                         <p>{{ companyelement.price }} Glorks</p>               
                     </div>
                     <div class="elementinfo borderbottom"> 
-                        <p>Amount:</p>
+                        <p>Your Amount:</p>
                         <p>{{ companyelement.amount }} Mt's</p>               
                     </div>
             </div>
             <div class="colwrapper borderbottom" style="background-color: rgba({{companyelement.element.color}},0.2);">
                 <div class="elementinfo borderbottom">     
-                        <p>Average Price:</p>
-                        <p>{{ average }}</p>
+                        <p>Average Company Price:</p>
+                        <p>{{ average }} Glorks</p>
                     </div>        
             </div>
 

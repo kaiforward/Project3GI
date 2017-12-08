@@ -10,7 +10,6 @@ from django.utils import timezone
 class AccountUserManager(UserManager):
 	def m_create_user(self, username, email, password,
 		is_staff, is_superuser, **extra_fields):
-	# function creates a User with the given attributes (email/name/ect)
 		now = timezone.now()
 		if not email:
 			raise ValueError('The given username must be set')
@@ -25,10 +24,9 @@ class AccountUserManager(UserManager):
 		return user
 
 class User(AbstractUser):
-    # now that we've abstracted this class we can add any
-    # number of custom attribute to our user class
- 
-    # in later units we'll be adding things like payment details!
- 
-    objects = AccountUserManager()
+	#abractUser is taking django's standard user class and adding extra attributes here.
+	# add stripe id
+	stripe_id = models.CharField(max_length=40, default='')
+	# User manager. 
+	objects = AccountUserManager()
 				

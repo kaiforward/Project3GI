@@ -1,8 +1,9 @@
 {% extends "base.html" %}
 {% block content %}
-<h2 class="medheadline">
+<h2 class="bigheadline">
    MINING FACILITY
 </h2>
+<hr>
 {% for mine in mines %}
     <div class="shipoverlay">
         <h1>{{ mine.get_level_display }}</h1>           

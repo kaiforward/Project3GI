@@ -1,10 +1,12 @@
 {% extends "base.html" %}
 {% load bootstrap_tags %}
+{% load companies_extras %}
 {% block content %}
 <span id="shipbuypage"></span>
-<h2 class="medheadline">
+<h2 class="bigheadline">
    CARGO SHIPS
 </h2>
+<hr>
     <div class="shipoverlay">
         <h1>{{ ship.ship }}</h1>           
         <img src="/media/{{ ship.image }}" class="ship">
@@ -34,7 +36,9 @@
         </div> 
     </div> 
     <hr>
-    <div class="colwrapper color">               
+    <div class="myform color ">        
+        <h2 class="medheadline">Your Money:</h2>
+        <p class="borderbottom">{% readable_int player.money %}</p>               
         <form method="POST" enctype="multipart/form-data">
             {% csrf_token %}
             {{ form | as_bootstrap}}
@@ -48,8 +52,8 @@
                         {% endfor %}
                     </div>
                 </div>
-            {% endif %}
-        </form>
+            {% endif %}           
+        </form>   
     </div> 
     <hr>      
 {% endblock %}

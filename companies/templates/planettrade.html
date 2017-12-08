@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load bootstrap_tags %}
+{% load companies_extras %}
+{% block content %}
+    <!-- PAGE FOR PLAYER TRADING WITH PLANET -->
+    <span id="tradepage"></span>
+    <div class="colwrapper color">  
+            <div class="colwrapper" style="background-color: rgba({{planetelement.element.color}},0.2);">
+                <div class="elementinfo borderbottom">     
+                        <p>Planet:</p>
+                        <p>{{ planetelement.planet.name }}</p>
+                </div>
+                <div class="elementinfo borderbottom">     
+                        <p>Element:</p>
+                        <p>{{ planetelement.element.name }}</p>
+                </div>
+                <div class="elementinfo borderbottom">               
+                    <p>Weight:</p>
+                    <p>{{ planetelement.element.weight }}u</p>
+                </div>         
+                <div class="elementinfo borderbottom"> 
+                    <p>Price:</p>
+                    <p ><span id="pricecheck">{{ planetelement.price }}</span> Glorks</p>               
+                </div>
+                <div class="elementinfo borderbottom">     
+                        <p>Average Company Sell Price:</p>
+                        <p>{{ company_average }} Glorks</p>
+                </div>
+                <div class="elementinfo borderbottom">     
+                        <p>Average Planet Buy Price:</p>
+                        <p>{{ planet_average }} Glorks</p>
+                </div> 
+                <div class="elementinfo borderbottom">
+                        <!-- find company distance     -->
+                        {% find_distance planetelement.planet.locationx planetelement.planet.locationy planetelement.planet.locationz player.locationx player.locationy player.locationz as the_distance %}
+                        <p>Distance:</p>
+                        <p> <span id="distance">{{ the_distance }}</span>: LY</p>
+                </div> 
+                <div class="elementinfo borderbottom">     
+                        <p>Your Amount:</p>
+                        <p>{{ playerelement.amount }} Mt's</p>
+                </div>        
+            </div>           
+        <h3>How many do you want to sell?</h3>
+        <h3 class="smallheadline">Your Amount:</h3>
+        <h3 class="bottomborder">{{ playerelement.amount }} Mt's Glorks</h3>
+        <form method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form | as_bootstrap}}                
+                <button type="submit" class="btn CCbutton">Sell for <span id="totalprice">0</span> Glorks</button>
+                <span>- Shipping: <span id="fuelcost"></span> g</span>
+                <hr>
+                {% if messages %}
+                    <div class="alert alert-success">
+                        <div class="messages">
+                            {% for message in messages %}
+                                {{ message }}
+                            {% endfor %}
+                        </div>
+                    </div>
+                {% endif %}
+        </form>
+    </div>
+
+{% endblock %}

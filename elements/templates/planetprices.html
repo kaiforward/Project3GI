@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+{% block content %}
+{% load companies_extras %}
+<div class="medheadline">
+   THE ELEMENT MARKETPLACE
+</div>
+<div class="medheadline" style="background-color: rgba({{element.color }},0.7);">
+   AVERAGE BUY PRICE: {{ planet_average }}
+</div>
+<div class="medheadline" style="background-color: rgba({{element.color }},0.7);">
+   AVERAGE SELL PRICE: {{ company_average }}
+</div>
+
+<div class=" rowwrapper">
+{% for planetelement in planetelements %}
+<div class="rowcolwrapper elementwrapper rel color">
+        <div class="colwrapper borderbottom" style="background-color: rgba({{element.color}},0.2);">
+            <div class="elementinfo borderbottom">   
+                <p>Trader:</p>
+                <p>{{ planetelement.planet.name }}</p>
+            </div>
+            <div class="elementinfo borderbottom">   
+                <p>Element:</p>
+                <p>{{ planetelement.element.name }}</p>
+            </div>
+            <div class="elementinfo borderbottom">               
+                <p>Distance:</p>
+                <p> {% find_distance planetelement.planet.locationx planetelement.planet.locationy planetelement.planet.locationz player.locationx player.locationy player.locationz %}: LY</p>
+            </div>         
+            <div class="elementinfo borderbottom"> 
+                <p>Price:</p>
+                <p>{{ planetelement.price }} Glorks</p>               
+            </div>
+            <div class="elementinfo"> 
+                <p>Sell Stock:</p>
+                <button class="btn CCbutton" onclick="location.href='{% url 'planettrade' planetelement.planet.pk planetelement.pk %}'">Sell</button>
+            </div>
+        </div>
+        <div class="el whiteborder" style="background-color: rgb({{ planetelement.element.color }});">
+            <h1> {{ planetelement.price}}</h1>
+        </div>  
+</div>          
+{% endfor %}
+</div>
+{% endblock %}

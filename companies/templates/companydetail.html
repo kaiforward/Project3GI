@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+{% load static %}
+{% load companies_extras %}
+<h1 class="bigheadline">TRADER INFO</h1>
+<hr>
+<div class="color"> 
+    <div class="rowcolwrapper profilewrapper">	
+    	<div class="colwrapper">	
+    		<h2 >Trader:</h2>	
+    		<p>{{ company.name }}</p>
+    		<h2>Glorkian Credits: </h2>
+    		<p>{% readable_int company.money %}c</p>
+            <h2>Planet Type: </h2>
+            <p>{{ company.get_planets_display }}</p>
+            <h2>Location: </h2>
+            <p>{{ company.locationx }}, {{ company.locationy }}, {{company.locationz}}</p>
+            <h2>Distance: </h2>
+            <p>{% find_distance company.locationx company.locationy company.locationz player.locationx player.locationy player.locationz %}</p>
+    	</div>
+    	<div class="colwrapper">
+                {% if company.image %}
+                        <img src="/media/{{ company.image }}" class="profileimg">
+                {% else %}
+                        <img src="{% static 'images/mining_facility.jpg' %}" class="profileimg">       
+                {% endif %}         
+            <h2>Description: </h2>
+            <p class="profiledesc">{{ company.description }}</p>
+    	</div>
+    </div>
+</div>
+<hr>
+
+<div class=" rowwrapper">
+{% for companyelement in companyelements %}
+<div class="rowcolwrapper elementwrapper rel color">
+        <div class="colwrapper borderbottom" style="background-color: rgba({{companyelement.element.color}},0.2);">
+            <div class="elementinfo borderbottom">   
+                <p>Trader:</p>
+                <p>{{ companyelement.company }}</p>
+            </div>
+            <div class="elementinfo borderbottom">   
+                <p>Element:</p>
+                <p>{{ companyelement.element.name }}</p>
+            </div>
+            <div class="elementinfo borderbottom">               
+                <p>Weight:</p>
+                <p>{{ companyelement.element.weight }}u</p>
+            </div>         
+            <div class="elementinfo borderbottom"> 
+                <p>Price:</p>
+                <p>{{ companyelement.price }} Glorks</p>               
+            </div>
+            <div class="elementinfo borderbottom"> 
+                <p>Amount:</p>
+                <p>{{ companyelement.amount }} Mt's</p>               
+            </div>
+            <div class="elementinfo"> 
+                <p>Sell Stock:</p>
+                <button class="btn CCbutton" onclick="location.href='{% url 'companytrade' companyelement.company.pk companyelement.pk %}'">Buy</button>
+            </div>
+        </div>
+        <div class="el borderbottom" style="background-color: rgb({{ companyelement.element.color }});">
+            <div>
+                <h1> {{ companyelement.element.tag.0 }} </h1>
+                <h2> {{ companyelement.element.tag.1 }} </h2>
+                <h1> {{ companyelement.element.tag.2}} </h1>
+            </div>
+            <p> {{ companyelement.element.name}} </p>
+        </div> 
+</div>          
+{% endfor %}
+</div>
+{% endblock %}

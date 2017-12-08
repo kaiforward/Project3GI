@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h2 class="bigheadline">
+   UPGRADES
+</h2>
+<hr>
+{% for upgrade in upgrades %}
+<div class="rowcolwrapper">
+    <div class="colwrapper CC">
+        <h3>UPGRADE</h3>
+        <p class="borderbottom"> {{ upgrade.name }} </p>
+        <h3>DESCRIPTION</h3>
+        <p class="borderbottom"> {{ upgrade.desc }} </p>
+        <button onclick="location.href='{% url 'upgradedetail' upgrade.pk %}'"
+        class="btn CCbutton whiteborder">More</button>        
+    </div>
+    <div class="colwrapper CC">
+        <h3>PRICE</h3>
+        <p class="borderbottom"> {{ upgrade.price }} </p>        
+        <img src="/media/{{ upgrade.image }}" class="planetimg">
+    </div>
+</div>
+<hr>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h2 class="medheadline">
+   PLANET INFO
+</h2>
+{% for planet in planets %}
+<div class="rowcolwrapper">
+    <div class="colwrapper CC">
+        <h2>PLANET NAME</h2>
+        <p> {{ planet.name }} </p>
+        <h2>PLANET TYPE</h2>
+        <p> {{ planet.planet_type.name }} </p>
+        <h2>LOCATION</h2>
+        <p> {{ planet.locationx }}, {{ planet.locationy }}, {{ planet.locationz }}</p>
+        <p> {{ planet.planet_type.description }} </p>
+    </div>
+    <div class="colwrapper CC">
+        <img src="/media/{{ planet.planet_type.image }}" class="planetimg">
+    </div>
+</div>
+{% endfor %}
+{% endblock %}

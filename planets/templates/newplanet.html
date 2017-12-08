@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+<h2 class="medheadline">
+   PLANET INFO
+</h2>
+
+<div class="rowcolwrapper">
+    <div class="colwrapper CC">
+        <h2>PLANET NAME</h2>
+        <p> {{ planet.name }} </p>
+        <h2>PLANET TYPE</h2>
+        <p> {{ planet.planet_type.name }} </p>
+        <h2>LOCATION</h2>
+        <p> {{ planet.locationx }}, {{ planet.locationy }}, {{ planet.locationz }}</p>
+        <p> {{ planet.planet_type.description }} </p>
+    </div>
+    <div class="colwrapper CC">
+        <img src="/media/{{ planet.planet_type.image }}" class="planetimg">
+    </div>
+</div>
+
+<h2 class="medheadline">
+   WANTED ELEMENTS
+</h2>
+<div class=" rowwrapper">
+{% for planet_element in elements %}
+<div class="rowcolwrapper elementwrapper rel color">
+        <div class="colwrapper borderbottom" style="background-color: rgba({{planet_element.element.color}},0.2);">
+            <div class="elementinfo borderbottom">   
+                <p>Element:</p>
+                <p>{{ planet_element.element.name }}</p>
+            </div>
+            <div class="elementinfo borderbottom">               
+                <p>Weight:</p>
+                <p>{{ planet_element.element.weight }}u</p>
+            </div> 
+            <div class="elementinfo borderbottom">               
+                <p>Rarity:</p>
+                <p>{{ planet_element.element.rarity }}u</p>
+            </div> 
+            <div class="elementinfo borderbottom">               
+                <p>Price:</p>
+                <p>{{ planet_element.price }}u</p>
+            </div>          
+            <div class="elementinfo"> 
+                <p>Buy Stock:</p>
+                <button class="btn CCbutton" >View Prices</button>
+            </div>
+        </div>
+        <div class="el borderbottom" style="background-color: rgb({{ planet_element.element.color }});">
+            <div>
+                <h1> {{ planet_element.element.tag.0 }} </h1>
+                <h2> {{ planet_element.element.tag.1 }} </h2>
+                <h1> {{ planet_element.element.tag.2}} </h1>
+            </div>
+            <p> {{ planet_element.element.name}} </p>
+        </div>  
+</div>          
+{% endfor %}
+</div>
+
+{% endblock %}

@@ -5,7 +5,10 @@
    THE ELEMENT MARKETPLACE
 </div>
 <div class="medheadline" style="background-color: rgba({{element.color }},0.7);">
-   AVERAGE PRICE: {{ average }}
+   AVERAGE SELL PRICE: {{ company_average }}
+</div>
+<div class="medheadline" style="background-color: rgba({{element.color }},0.7);">
+   AVERAGE BUY PRICE: {{ planet_average }}
 </div>
 
 <div class=" rowwrapper">
@@ -21,8 +24,8 @@
                 <p>{{ companyelement.element.name }}</p>
             </div>
             <div class="elementinfo borderbottom">               
-                <p>Weight:</p>
-                <p>{{ companyelement.element.weight }}u</p>
+                <p>Distance:</p>
+                <p> {% find_distance companyelement.company.locationx companyelement.company.locationy companyelement.company.locationz player.locationx player.locationy player.locationz %}: LY</p>
             </div>         
             <div class="elementinfo borderbottom"> 
                 <p>Price:</p>
@@ -37,10 +40,8 @@
                 <button class="btn CCbutton" onclick="location.href='{% url 'companytrade' companyelement.company.pk companyelement.pk %}'">Purchase</button>
             </div>
         </div>
-        <div class="el" style="background-color: rgb({{ companyelement.element.color }});">
-            <p class="smallheadline"> {{ companyelement.company.name }}</p>
-            <p> {{ companyelement.price}}: Credits</p>
-            <p> {% find_distance companyelement.company.locationx companyelement.company.locationy companyelement.company.locationz player.locationx player.locationy player.locationz %}: LY</p>
+        <div class="el whiteborder" style="background-color: rgb({{ companyelement.element.color }});">
+            <h2> {{ companyelement.price}}</h2>
         </div>  
 </div>          
 {% endfor %}

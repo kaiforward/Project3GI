@@ -2,6 +2,8 @@
 {% block content %}
 {% load static %}
 {% load companies_extras %}
+<h1 class="bigheadline">TRADER INFO</h1>
+<hr>
 {% for company in companies %}
     <div class="color"> 
         <div class="rowcolwrapper profilewrapper">	
@@ -16,6 +18,7 @@
                 <p>{{ company.locationx }}, {{ company.locationy }}, {{company.locationz}}</p>
                 <h2>Distance: </h2>
                 <p>{% find_distance company.locationx company.locationy company.locationz player.locationx player.locationy player.locationz %}</p>
+                <button class="btn CCbutton" onclick="location.href='{% url 'companydetail' company.pk %}'">More</button>
         	</div>
         	<div class="colwrapper">
                     {% if company.image %}

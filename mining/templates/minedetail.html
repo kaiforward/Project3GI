@@ -2,9 +2,10 @@
 {% load bootstrap_tags %}
 {% block content %}
 <span id="minebuypage"></span>
-<h2 class="medheadline">
+<h2 class="bigheadline">
    MINING FACILITY
 </h2>
+<hr>
     <div class="shipoverlay">
         <h1>{{ mine.get_level_display }}</h1>           
         <img src="/media/{{ mine.image }}" class="ship">
@@ -30,7 +31,9 @@
         </div>
     </div>
     <hr>
-    <div class="colwrapper color">               
+    <div class="colwrapper color myform">
+        <h2 class="medheadline">Your Money:</h2>
+        <p class="borderbottom">{% readable_int player.money %}</p>                
         <form method="POST" enctype="multipart/form-data">
                 {% csrf_token %}
                 {{ form | as_bootstrap}}
@@ -44,7 +47,7 @@
                             {% endfor %}
                         </div>
                     </div>
-                {% endif %}
+                {% endif %}            
         </form>
     </div> 
     <hr>      

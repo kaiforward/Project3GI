@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load companies_extras %}
+{% block content %}
+<h1 class="bigheadline"> PLANET INFO </h1>
+<hr>
+{% for planet in planets %}
+<div class="rowcolwrapper">
+    <div class="colwrapper CC">
+        <h2>PLANET NAME</h2>
+        <p class="borderbottom"> {{ planet.name }} </p>
+        <h2>PLANET TYPE</h2>
+        <p class="borderbottom"> {{ planet.planet_type.name }} </p>
+        <h2>LOCATION</h2>
+        <p class="borderbottom"> {{ planet.locationx }}, {{ planet.locationy }}, {{ planet.locationz }}</p>
+        <!-- find company distance     -->
+        {% find_distance planet.locationx planet.locationy planet.locationz player.locationx player.locationy player.locationz as the_distance %}
+        <h2>Distance:</h2>
+        <p class="borderbottom"> <span id="distance">{{ the_distance }}</span>: LY</p>      
+        <button class="btn CCbutton whiteborder" onclick="location.href='{% url 'planetdetail' planet.pk %}'">More</button>
+    </div>
+    <div class="colwrapper CC">
+        <img src="/media/{{ planet.planet_type.image }}" class="planetimg">
+        <p> {{ planet.planet_type.description }} </p>  
+    </div>          
+</div>
+<hr class="color">
+{% endfor %}
+
+{% endblock %}
