@@ -13,3 +13,4 @@ six==1.11.0
 stripe==1.75.1
 urllib3==1.22
 gunicorn==19.7.1
+whitenoise==3.2
