@@ -126,9 +126,9 @@ USE_TZ = True
 # set static urls like this
 STATIC_URL = '/static/'
 # set static directory in base Directory like this.
-STATICFILES_DIRS = (
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, "static")
-)
+]
 # need static root??
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
