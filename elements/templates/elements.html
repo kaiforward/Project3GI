@@ -11,6 +11,14 @@
 <div class=" rowwrapper">
 {% for element in elements %}
 <div class="rowcolwrapper elementwrapper rel color">
+        <div class="el borderbottom" style="background-color: rgb({{ element.color }});">
+            <div>
+                <h1> {{ element.tag.0 }} </h1>
+                <h2> {{ element.tag.1 }} </h2>
+                <h1> {{element.tag.2}} </h1>
+            </div>
+            <p> {{ element.name}} </p>
+        </div>  
         <div class="colwrapper borderbottom" style="background-color: rgba({{element.color}},0.2);">
             <div class="elementinfo borderbottom">   
                 <p>Element:</p>
@@ -26,14 +34,7 @@
                 <button class="btn CCbutton" onclick="location.href='{% url 'planetprices' element.pk %}'">Sell</button>
             </div>
         </div>
-        <div class="el borderbottom" style="background-color: rgb({{ element.color }});">
-            <div>
-                <h1> {{ element.tag.0 }} </h1>
-                <h2> {{ element.tag.1 }} </h2>
-                <h1> {{element.tag.2}} </h1>
-            </div>
-            <p> {{ element.name}} </p>
-        </div>  
+
 </div>          
 {% endfor %}
 </div>
