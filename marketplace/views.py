@@ -11,7 +11,6 @@ from django.db.models import Avg, Max
 import random
 
 # Create your views here.
-
 @login_required(login_url='/login/')
 def marketplace_view(request):
     try:
@@ -34,3 +33,4 @@ def marketplace_view(request):
 def story_detail(request, story_pk):
 	chosen_story = get_object_or_404(Story, pk=story_pk)
 	return render(request, "storydetail.html", {'story': chosen_story}) 
+
