@@ -383,7 +383,7 @@ so the menu is hidden to the user, but is still visible to searches/screen reade
 	background-color: rgba(216,76,76,0.8);
 	text-align: center;
 }
-.home p { 
+.home p {
 	top: 20%;
 	text-align: center;
 	font-size: 2em;
@@ -392,6 +392,7 @@ so the menu is hidden to the user, but is still visible to searches/screen reade
 	padding:0% 2%;
 }
 .home button {
+	position: fixed;
 	margin: 0;
 	bottom: 5%;
 	font-size: 2em;
@@ -584,6 +585,9 @@ hr {
 	hr {
 		margin: 5px 0px;
 	}
+	p {
+		font-size: 1.5em;
+	}
 	.mobilehidden {	/*hides chosen linkbar when in mobile mode until opened*/
 		transition: opacity 0.2s;
 		-webkit-transition: opacity 0.2s;
@@ -758,6 +762,11 @@ hr {
 	.ship { /*image*/
 		height: 500px;
 	}
+}
+
+@media only screen and (max-height: 600px) {
+.home button {
+	position: static;
 }
 
 .container {
