@@ -1,5 +1,6 @@
 {% extends "base.html" %}
 {% load bootstrap_tags %}
+{% load companies_extras %}
 {% block content %}
 <span id="minebuypage"></span>
 <h2 class="bigheadline">
@@ -18,7 +19,7 @@
             </div>
             <div>               
                 <h2>Price:</h2>
-                <p><span id="pricecheck">{{ mine.price }}</span>G</p>
+                <p><span id="pricecheck">{% readable_int mine.price %}</span>G</p>
             </div>  
             <div>               
                 <h2>Production:</h2>

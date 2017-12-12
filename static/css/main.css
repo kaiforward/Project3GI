@@ -392,7 +392,6 @@ so the menu is hidden to the user, but is still visible to searches/screen reade
 	padding:0% 2%;
 }
 .home button {
-	position: fixed;
 	margin: 0;
 	bottom: 5%;
 	font-size: 2em;

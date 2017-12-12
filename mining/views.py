@@ -16,6 +16,7 @@ def mines_all(request):
 
 @login_required(login_url='/login/')
 def mine_detail(request, mine_pk):
+	player = request.user.company
 	mine = get_object_or_404(Mine, pk=mine_pk)
 	if request.method == "POST":            
 		form = MineForm(request.POST, request.FILES)
@@ -40,7 +41,7 @@ def mine_detail(request, mine_pk):
 				messages.error(request, 'You must choose at least one')
 	else:		   
 		form = MineForm()
-	return render(request, "minedetail.html", {'mine': mine, 'form': form}) 
+	return render(request, "minedetail.html", {'mine': mine, 'form': form, 'player': player}) 
 
 # upgrades
 @login_required(login_url='/login/')

@@ -19,7 +19,7 @@
             </div>
             <div>               
                 <h2>Price:</h2>
-                <p><span id="pricecheck">{{ ship.price }}</span>c</p>
+                <p><span id="pricecheck">{% readable_int ship.price %} G</span>c</p>
             </div>  
             <div>               
                 <h2>Speed:</h2>
@@ -27,7 +27,7 @@
             </div>
             <div>               
                 <h2>Storage:</h2>
-                <p>{{ ship.cargo_space }}z</p>
+                <p>{{ ship.cargo_space }} Mt's</p>
             </div>        
         </div>
         <div>               

@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load companies_extras %}
 {% block content %}
 <h2 class="bigheadline">
    CARGO SHIPS
@@ -10,7 +11,7 @@
         <img src="/media/{{ ship.image }}" class="ship">
         <div class="shipinfo">
             <button onclick="location.href='{% url 'shipdetail' ship.pk %}'">More</button> 
-            <h2>Price: {{ ship.price }}</h2> 
+            <h2>Price: {% readable_int ship.price %}</h2> 
         </div>
     </div>
     <div class="shipmobile shipwrapper">
@@ -21,7 +22,7 @@
             </div>
             <div>               
                 <h2>Price:</h2>
-                <p>{{ ship.price }}c</p>
+                <p>{% readable_int ship.price %} G</p>
             </div>  
             <div>               
                 <h2>Speed:</h2>
@@ -29,7 +30,7 @@
             </div>
             <div>               
                 <h2>Storage:</h2>
-                <p>{{ ship.cargo_space }}z</p>
+                <p>{{ ship.cargo_space }} Mt's</p>
             </div>        
         </div>
     </div>
