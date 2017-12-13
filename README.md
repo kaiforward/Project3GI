@@ -192,8 +192,12 @@ Last but not least we have to remove our DISABLE_COLLECTSTATIC command from hero
 ```
 heroku config:unset DISABLE_COLLECTSTATIC=1 --app YOUR_HEROKU_APP
 ```
+You can then view the site on heroku by clicking the view app button and view console logs.
 
-The site was then viewable on heroku.
+You can also still view locally by using:
+```
+heroku local -f Procfile.local
+```
 
 
 
