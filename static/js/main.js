@@ -9,7 +9,7 @@ if (document.getElementById('tradepage')!=null) {
 	document.getElementById('id_amount').oninput=function() {
 	    totalPrice = this.value * unitPrice
 	    totalPriceElement.innerText = totalPrice.toLocaleString();
-	    readableFuelCost = Math.round(distance / 100 * this.value)
+	    readableFuelCost = Math.round(distance / 300 * this.value)
 	    fuelcost.innerText = readableFuelCost.toLocaleString(); 
 	}
 	// calculate fuel cost and total price as amount is entered.

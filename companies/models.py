@@ -175,7 +175,7 @@ class TradeManager(models.Manager):
 		z2 = seller.locationz
 		distance = math.sqrt((x-x2)*(x-x2) + (y-y2)*(y-y2) + (z-z2)*(z-z2))
 		# work out fuel cost from distance
-		fuel_cost = distance / 100 * amount
+		fuel_cost = distance / 300 * amount
 		round(fuel_cost)
 		price = amount * company_element.price + fuel_cost
 		# make a new trade
@@ -255,7 +255,7 @@ class PlanetTradeManager(models.Manager):
 		z2 = seller.locationz
 		distance = math.sqrt((x-x2)*(x-x2) + (y-y2)*(y-y2) + (z-z2)*(z-z2))
 		# work out fuel cost from distance
-		fuel_cost = distance / 100 * amount
+		fuel_cost = distance / 300 * amount
 		round(fuel_cost)
 		price = amount * planet_element.price - fuel_cost
 		# make a new trade
