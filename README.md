@@ -25,8 +25,8 @@ This site will use a Django back-end framwork using an SQL database. The front e
   - **JQuery** is used for extra front-end functionality.
 - [Django](https://www.djangoproject.com/)
     - This project runs a Django 1.11 framework.
-- [PostGreSQL](https://www.postgresql.org/)
-    - This site uses Heroku's PostGreSQL add-on for the user database as well as SQLite while in development.
+- [ClearDb](http://w2.cleardb.net/)
+    - This site uses Heroku's ClearDb add-on for the user database as well as SQLite while in development.
   
 ## Contributing
 
@@ -172,7 +172,7 @@ Last but not least we have to remove our DISABLE_COLLECTSTATIC command from hero
 heroku config:unset DISABLE_COLLECTSTATIC=1 --app YOUR_HEROKU_APP
 ```
 
-The site is now viewable on Heroku!
+The site was then viewable on heroku.
 
 
 
