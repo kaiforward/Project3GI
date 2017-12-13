@@ -13,9 +13,7 @@
 <div class="rowcolwrapper elementwrapper rel color">
         <div class="el borderbottom" style="background-color: rgb({{ element.color }});">
             <div>
-                <h1> {{ element.tag.0 }} </h1>
-                <h2> {{ element.tag.1 }} </h2>
-                <h1> {{element.tag.2}} </h1>
+                <h1> {{ element.tag }} </h1>
             </div>
             <p> {{ element.name}} </p>
         </div>  
@@ -27,7 +25,11 @@
             <div class="elementinfo borderbottom">               
                 <p>Weight:</p>
                 <p>{{ element.weight }}u</p>
-            </div>         
+            </div> 
+            <div class="elementinfo borderbottom">               
+                <p>Rarity:</p>
+                <p>{{ element.rarity }}</p>
+            </div>          
             <div class="elementinfo"> 
                 <p>Buy Stock:</p>
                 <button class="btn CCbutton" onclick="location.href='{% url 'filterelement' element.pk %}'">Buy</button>
