@@ -85,19 +85,19 @@ I then moved to serperate my development code from production code by seperating
 
 The important things to change were to move Strip, Paypal and Database settings from base.py to dev.py and staging.py, dev.py will contain test paypal, stripe and database settings, and staging.py will contain the same details but suitable for live production. i.e a live PayPal key.
 
-We also do the same with the requirements files, where base.txt contains most of the dependencies. Dev.txt will contain dependencies only need for development and staging.txt will contain whats is needed for a live production server, for example SQL databases.
+I did the same with the requirements files, where base.txt contains most of the dependencies. Dev.txt will contain dependencies only need for development and staging.txt will contain whats is needed for a live production server, for example SQL-databases.
 
 ### Procfiles
 
-Next week need to create our procfiles, in Procfile we include the following:
+Next I created the procfiles, in Procfile we include the following:
 ```
 web: gunicorn we_are_social.wsgi:application
 ```
-we also add a runtime.txt to tell which python version we are using:
+Then add a runtime.txt to tell which python version we are using:
 ```
 python-2.7.14
 ```
-Then we create the Procfile.Local for running the server locally with heroku.
+Then to create the Procfile.Local for running the server locally with heroku.
 
 for windows it looks like this 
 ```
@@ -108,14 +108,14 @@ and on mac
 web: gunicorn we_are_social.wsgi:application
 ```
 
-Then by using the following command we should be able to open the server locally.
+Then by using the following command the server will open locally.
 ```
 heroku local -f Procfile.local
 ```
 
 ### Heroku
 
-Next we head back to heroku, and connect our github repository with our heroku app and enable automatic deploy's so any future pushes to git will be reflected in the heroku app.
+Next i needed to connect github repository with my heroku app and enable automatic deploy's so any future pushes to git will be reflected in the heroku app.
 
 To change the settings heroku uses when running the server use: 
 ```
@@ -134,13 +134,13 @@ heroku ps:scale web=1 --app YOUR_HEROKU_APP
 
 To use ClearDB, head to the resources tab for the django app and choose Cleardb in the add-ons sections.
 
-So that we can use the DB we have add another dependency to to staging.py and we are only using this for the live production server.
+To use the DB i have add another dependency to staging.py as im only using this for the live server.
 I did this by adding the following:
 ```
 dj-database-url==0.2.1
 ```
 
-The change staging.py to use the new Db setting.
+Then change staging.py to use the new Db setting.
 
 ```python
 import dj_database_url
@@ -151,12 +151,12 @@ DATABASES = {
 }
 ```
 
-After all these changes we can push all out migrations to Heroku by using the following command:
+After all these changes, I pushed my migrations to Heroku by using the following command:
 ```
 heroku run --app YOUR_HEROKU_APP python manage.py migrate --settings=setting.staging
 ```
 
-To populate the database with objects we have already created we use this command to extract the data:
+To populate the database with objects I have already created I use this command to extract the data:
 ```
 python manage.py dumpdata --natural-foreign -e contenttypes -e auth.Permission --indent=4 > db.json --settings=settings.dev
 ```
@@ -186,9 +186,9 @@ os.environ.setdefault("DJANGO_SETTINGS_MODULE", "settings.staging")
 application = get_wsgi_application()
 application = DjangoWhiteNoise(application)
 ```
-This wraps the application in a whitenoise function which allows it to acess the staticfiles and serve them.
+This wraps the application in whitenoise which allows it to serve your static files.
 
-Last but not least we have to remove our DISABLE_COLLECTSTATIC command from heroku by either going to the ConfigVars on heroku and remove it, or input the following command:
+Last but not least is to remove the DISABLE_COLLECTSTATIC command from heroku by either going to the ConfigVars on heroku and remove it, or input the following command:
 ```
 heroku config:unset DISABLE_COLLECTSTATIC=1 --app YOUR_HEROKU_APP
 ```
