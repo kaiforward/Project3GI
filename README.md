@@ -8,13 +8,34 @@ Browser based online trading game
 
 This site is an web-based browser trading game in the setting of a fictional sci-fi galaxy.
 
-### What does it do?
+### How do i use this site?
 
-This site will allow user to create an account and take part in a fictional galactic trading simulation. They will be able to purchase and trade different elements, buy ships to move them and mines to create them. They will be able to Trade them with companies (other players) and planets which players can sell to. Players can set their own prices for elements, and planet prices change as players buy from them.
+This site will allow the user to create an account and take part in a fictional galactic trading simulation. They will be able to purchase and trade different elements, buy ships to move them and mines to create them. They will be able to Trade them with companies (other players) and planets which players can sell to. Players can set their own prices for elements, and planet prices change as players buy from them. Players will also be able to mine resources using mines and check them on their profile page.
 
 ### How does it work?
 
 This site will use a Django back-end framwork using an SQL database. The front end will make use of bootstrap and jquery for extra functionality as well as basic forms.
+
+### Design Choices
+
+For the website I wanted the design to be colorful and simple. I chose the color scheme as it seemed to suit something that was more like a game.
+
+It tried to keep my nav-bar simple and responsive, and reduced the number of menu's by creating a sub-menu in the marketplace page, that also helped lend to the feeling of it being a game having lots of buttons readily available on the screen in the right situation rather than dropdowns.
+
+The player profile screen uses tabs because there is a lot of information, it keeps the pages small and players can easily access the info they are interested in. 
+
+I chose to use an SQL database for this project as SQL-lite is already integrated with django and it makes the use of other SQL-db's a lot easier. The structure of SQL database also works very well with the set-up that i am using.
+
+I have tried to use defensive design where possible making sure any errors in trades, purchases ect return useful relevant messages to the end user, and that parts of the site that users shouldn't access while logged-out for example are restricted.
+
+### Existing Features
+- Full User Account system, allow users (players) to create and name a company after which they are given ships/mines to start the game with.
+- Profile page, with full information on what a player owns, trades they have made and tips on how to use the site.
+- Marketplace page with links to Elements page, other traders and planets, also contains Top Rankings of players and some news articles.
+- Full trade system that allow players to buy and sell elements and see those trades on their profile page.
+- Trade's take real-time measured in minutes, and ships that players can purchase in-game can make them faster.
+- Ability to buy and own a fleet of ships and series of mines.
+- Players can choose what Element mines produce and check how many have produced since last time they checked on their profile screen. production of mines is also measured in real-time hours.
 
 ## Tech Used
 
