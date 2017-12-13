@@ -14,6 +14,9 @@
 <div class=" rowwrapper">
 {% for planetelement in planetelements %}
 <div class="rowcolwrapper elementwrapper rel color">
+        <div class="el whiteborder" style="background-color: rgb({{ planetelement.element.color }});">
+            <h1> {{ planetelement.price}}</h1>
+        </div> 
         <div class="colwrapper borderbottom" style="background-color: rgba({{element.color}},0.2);">
             <div class="elementinfo borderbottom">   
                 <p>Trader:</p>
@@ -35,10 +38,7 @@
                 <p>Sell Stock:</p>
                 <button class="btn CCbutton" onclick="location.href='{% url 'planettrade' planetelement.planet.pk planetelement.pk %}'">Sell</button>
             </div>
-        </div>
-        <div class="el whiteborder" style="background-color: rgb({{ planetelement.element.color }});">
-            <h1> {{ planetelement.price}}</h1>
-        </div>  
+        </div> 
 </div>          
 {% endfor %}
 </div>

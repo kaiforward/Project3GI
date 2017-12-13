@@ -14,6 +14,9 @@
 <div class=" rowwrapper">
 {% for companyelement in companyelements %}
 <div class="rowcolwrapper elementwrapper rel color">
+        <div class="el whiteborder" style="background-color: rgb({{ companyelement.element.color }});">
+            <h1> {{ companyelement.price}}</h1>
+        </div> 
         <div class="colwrapper borderbottom" style="background-color: rgba({{element.color}},0.2);">
             <div class="elementinfo borderbottom">   
                 <p>Trader:</p>
@@ -39,10 +42,7 @@
                 <p>Buy Stock:</p>
                 <button class="btn CCbutton" onclick="location.href='{% url 'companytrade' companyelement.company.pk companyelement.pk %}'">Purchase</button>
             </div>
-        </div>
-        <div class="el whiteborder" style="background-color: rgb({{ companyelement.element.color }});">
-            <h2> {{ companyelement.price}}</h2>
-        </div>  
+        </div> 
 </div>          
 {% endfor %}
 </div>
