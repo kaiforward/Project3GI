@@ -200,6 +200,11 @@ You can also still view locally by using:
 heroku local -f Procfile.local
 ```
 
+### References
+
+Part is this project were directly influenced by parts of the LMS specifically the user authentication system, as i referred to it a lot when starting the project.
+Lot's of other code was influenced by learning on the LMS as well as asking questions or solutions to them found on stack overflow and it was a great help in completing this project.
+
 
 
 
