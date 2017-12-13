@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<div class="colwrapper color">
+    <h2 class="medheadline">Welcome</h2>
+    <p>This is the galactic marketplace, where you can buy and trade raw elements, and start your own mining operations to provide long term profits. The Galaxy needs your materials, go deliver them!</p>
+    <h2 class="medheadline">How it works</h2>
+    <p>You gather elements by mining and trading with other companies. Then find planets with the best price to sell to!</p>
+    <p>The more you sell to a planet the less they will pay until they put out new orders for materials, you'll have no idea when this will be however so take advantage of good prices while they are there. Just remember finding the best price takes time, letting other players buy from you can leave you with more time to decide what ship your going to purchase next!</p>
+    <div class="shipoverlay">
+        <h1>{{ ship.ship }}</h1>           
+        <img src="/media/{{ ship.image }}" class="ship">
+        <div class="shipinfo">
+            <h2>Faster ships will let you move resources more quickly!</h2> 
+        </div>
+    </div>
+    <hr>
+    <h2 class="medheadline">Anything has a price</h2>
+    <p>You can't stop other players buying from your stores, Emporer Zog demands that money and materials always keep moving. However if your mining more Zorkium than anyone else, theres nothing to stop you charging what you want to other players to price them out of any profits. They will have to find them elsewhere.</p>
+    <div class="shipoverlay">
+        <h1>{{ mine.get_level_display }}</h1>           
+        <img src="/media/{{ mine.image }}" class="ship">
+        <div class="shipinfo">
+            <h2>Mines will continually produce resources for you.</h2> 
+        </div>
+    </div>
+    <hr>
+    <h2 class="medheadline">Lets get started!</h2>
+    <p>Just click the registration and choose a company name on the next page! You'll be given some things to get you started! Happy Trading!</p>
+    <hr>
+    <button type="submit" class="btn CCbutton" onclick="location.href='/company/profile'">Register</button> 
+    <hr>
+</div>
+
+{% endblock %}

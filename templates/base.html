@@ -16,11 +16,11 @@
 
 <body>
 <div id="backgrounddiv">
-<!-- <img src="{% static 'images/a.jpg' %}" class="abs backgroundimg"> -->
+    <!-- random image goes here -->
 </div>
 <div id="navbar" class="CC">
     <div id="navblock">
-      <h1 id="navtitle" class="CC"><a href="/">Galactic Index</a></h1>
+      <h1 id="navtitle" class="CC"><a class="CC" href="/">Galactic Index</a></h1>
       <p class="menuname">more</p>
       <div class="navbutton CClink" tabindex="0">
             <i class=" fa fa-angle-double-down fadein" aria-hidden="true"></i>
@@ -29,8 +29,7 @@
     </div>
     <div class="abslink">
         <div id="linkbar" class="CC mobilehidden">
-            <a href="" class="linkimg"></a>
-      
+            <a href="" class="linkimg"></a>      
             {% if user.is_active %}
                 <a href="{% url 'company' %}" class="link CClink">Company</a>
                 <a href="{% url 'marketplace' %}" class="link CClink">Marketplace</a>
@@ -38,9 +37,9 @@
                 <a href="{% url 'minesall' %}" class="link CClink">Mines</a>  
                 <a href="{% url 'logout' %}" class="link CClink">Log Out</a>               
             {% else %}
-                <a href="/" class="link CClink">Home</a>
+                <a href="{% url 'login' %}" class="link CClink">Log In</a>
                 <a href="{% url 'register' %}" class="link CClink">Register</a>
-                <a href="{% url 'login' %}" class="link CClink">Log In</a>                
+                <a href="{% url 'about' %}" class="link CClink">About</a>
             {% endif %}
         </div>
     </div>

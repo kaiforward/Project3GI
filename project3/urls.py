@@ -27,6 +27,7 @@ urlpatterns = [
 	url(r'^admin/', admin.site.urls),
     # HomePage
 	url(r'^$', home_views.home_view, name='index'),
+    url(r'^about/$', home_views.about_view, name='about'),
     # Authentication
 	url(r'^register/$', accounts_views.register, name='register'),
     url(r'^profile/$', accounts_views.profile, name='profile'),
