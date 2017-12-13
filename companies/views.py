@@ -45,11 +45,10 @@ def new_company(request):
             planet_types = PlanetType.objects.all()
             elements = Element.objects.all()
             
-            for x in xrange(1, random.randint(1,5)):
-                new_planet = Planet.objects.create_planet(planet_types)
-                chosen_elements = random.sample(elements, 10)
-                for element in chosen_elements:
-                    add_element = PlanetStorage.objects.change_planet_prices(new_planet, element, element.rarity)
+            new_planet = Planet.objects.create_planet(planet_types)
+            chosen_elements = random.sample(elements, 10)
+            for element in chosen_elements:
+                add_element = PlanetStorage.objects.change_planet_prices(new_planet, element, element.rarity)
                     
             return redirect(company_profile)
     else:

@@ -45,10 +45,6 @@
                 <p>Price:</p>
                 <p>{{ planetelement.price }} Glorks</p>               
             </div>
-            <div class="elementinfo borderbottom"> 
-                <p>Amount:</p>
-                <p>{{ planetelement.amount }} Mt's</p>               
-            </div>
             <div class="elementinfo"> 
                 <p>Sell Stock:</p>
                 <button class="btn CCbutton" onclick="location.href='{% url 'planettrade' planetelement.planet.pk planetelement.pk %}'">Sell</button>

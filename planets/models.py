@@ -53,7 +53,7 @@ class Planet(models.Model):
 class PlanetStorageManager(models.Manager):
 	def change_planet_prices(self, planet_object, element_object, element_rarity):
 
-		element_price =  10 + random.randint(10, 50) * (element_rarity / 2)
+		element_price = (random.randint(1, 10) + random.randint(10, 50)) * (element_rarity / 2)
 
 		if random.random() > 0.5:
 			element_price += element_price / random.randint(17, 25)
