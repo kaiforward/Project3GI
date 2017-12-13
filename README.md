@@ -121,7 +121,7 @@ dj-database-url==0.2.1
 
 The change staging.py to use the new Db setting.
 
-```
+```python
 import dj_database_url
  
 # Load the ClearDB connection details from the environment variable
@@ -154,7 +154,7 @@ pip install -r requirements/base.txt
 
 Then modify the WSGI file with the following:
 
-```
+```python
 import os
  
 from django.core.wsgi import get_wsgi_application
