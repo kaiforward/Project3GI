@@ -6,11 +6,11 @@ Browser based online trading game
 
 ### What is this site for?
 
-This site is an web-based browser trading game in the setting of a fictional sci-fi galaxy.
+This site is a trading game in the setting of a fictional sci-fi galaxy.
 
 ### How do i use this site?
 
-This site will allow the user to create an account and take part in a fictional galactic trading simulation. They will be able to purchase and trade different elements, buy ships to move them and mines to create them. They will be able to Trade them with companies (other players) and planets which players can sell to. Players can set their own prices for elements, and planet prices change as players buy from them. Players will also be able to mine resources using mines and check them on their profile page.
+This site will allow the user to create an account and take part in a fictional galactic trading simulation. They will be able to purchase and trade different elements, buy ships to move them and mines to create them. They will be able to trade them with companies (other players) and planets which players can sell to. Players can set their own prices for elements, and planet prices change as players buy from them. Players will also be able to mine resources using mines and check them on their profile page.
 
 ### How does it work?
 
@@ -20,22 +20,23 @@ This site will use a Django back-end framwork using an SQL database. The front e
 
 For the website I wanted the design to be colorful and simple. I chose the color scheme as it seemed to suit something that was more like a game.
 
-It tried to keep my nav-bar simple and responsive, and reduced the number of menu's by creating a sub-menu in the marketplace page, that also helped lend to the feeling of it being a game having lots of buttons readily available on the screen in the right situation rather than dropdowns.
+I tried to keep my nav-bar simple and responsive, and reduced the number of menus by creating a sub-menu in the marketplace page, that also helped lend to the feeling of it being a game having lots of buttons readily available on the screen in the right situation rather than dropdowns.
 
 The player profile screen uses tabs because there is a lot of information, it keeps the pages small and players can easily access the info they are interested in. 
 
-I chose to use an SQL database for this project as SQL-lite is already integrated with django and it makes the use of other SQL-db's a lot easier. The structure of SQL database also works very well with the set-up that i am using.
+I chose to use an SQL database for this project as SQL-lite is already integrated with django and it makes the use of other SQL-db's a lot easier. The structure of a SQL database also works very well with the set-up that I am using.
 
-I have tried to use defensive design where possible making sure any errors in trades, purchases ect return useful relevant messages to the end user, and that parts of the site that users shouldn't access while logged-out for example are restricted.
+I have tried to use defensive design where possible making sure any errors in trades, purchases, ect return useful relevant messages to the end user, and that parts of the site users shouldn't access while logged-out for example are restricted.
 
 ### Existing Features
 - Full User Account system, allow users (players) to create and name a company after which they are given ships/mines to start the game with.
 - Profile page, with full information on what a player owns, trades they have made and tips on how to use the site.
 - Marketplace page with links to Elements page, other traders and planets, also contains Top Rankings of players and some news articles.
-- Full trade system that allow players to buy and sell elements and see those trades on their profile page.
-- Trade's take real-time measured in minutes, and ships that players can purchase in-game can make them faster.
+- Full trade system that allows players to buy and sell elements and see those trades on their profile page.
+- Trades take real-time that is measured in minutes, and players can purchase ships in-game which can make trades faster.
 - Ability to buy and own a fleet of ships and series of mines.
-- Players can choose what Element mines produce and check how many have produced since last time they checked on their profile screen. production of mines is also measured in real-time hours.
+- Players can choose what Element mines produce. Every time a player checks their profile page they can check their production.
+- Production fo mines is also measured in real-time hours.
 
 ## Tech Used
 
@@ -51,14 +52,14 @@ I have tried to use defensive design where possible making sure any errors in tr
   
 ## Contributing
 
-### On local machine.
+### To run Locally
 
 Firstly you will need to clone this repository by running the git clone <project's Github URL> command
 
 This project uses Python version 2.7.14
 - [Python 2.7.14](https://www.python.org/downloads/)
 
-Using VirtualENV create a virtual enviroment and navigate to the requirements folder inside the root folder of the project.
+Use VirtualENV to create a virtual environment and navigate to the requirements folder inside the root folder of the project.
 
 using pip install the requirments in dev.txt using 
 ```
@@ -81,11 +82,11 @@ With my VirtualEnv activated, I Then installed gunicorn from the command line us
 pip install gunicorn
 ```
 
-I then moved to serperate my development code from production code by seperating my settings.py file into a base.py for dependencies needed by both development servers and productions. dev.py and staging.py contained settings for development and production servers respectively.
+I then moved to separate my development code from production code by seperating my settings.py file into a base.py for dependencies needed by both development servers and productions. dev.py and staging.py contained settings for development and production servers respectively.
 
-The important things to change were to move Strip, Paypal and Database settings from base.py to dev.py and staging.py, dev.py will contain test paypal, stripe and database settings, and staging.py will contain the same details but suitable for live production. i.e a live PayPal key.
+The important things to change were to move Stripe, Paypal and Database settings from base.py to dev.py and staging.py, dev.py will contain test paypal, stripe and database settings, and staging.py will contain the same details but suitable for live production. i.e a live PayPal key.
 
-I did the same with the requirements files, where base.txt contains most of the dependencies. Dev.txt will contain dependencies only need for development and staging.txt will contain whats is needed for a live production server, for example SQL-databases.
+I did the same with the requirements files, where base.txt contains most of the dependencies. Dev.txt will contain dependencies only needed for development and staging.txt will contain what is needed for a live production server, for example SQL-databases.
 
 ### Procfiles
 
@@ -115,7 +116,7 @@ heroku local -f Procfile.local
 
 ### Heroku
 
-Next i needed to connect github repository with my heroku app and enable automatic deploy's so any future pushes to git will be reflected in the heroku app.
+Next I needed to connect github repository with my heroku app and enable automatic deploys so any future pushes to git will be reflected in the heroku app.
 
 To change the settings heroku uses when running the server use: 
 ```
@@ -134,7 +135,7 @@ heroku ps:scale web=1 --app YOUR_HEROKU_APP
 
 To use ClearDB, head to the resources tab for the django app and choose Cleardb in the add-ons sections.
 
-To use the DB i have add another dependency to staging.py as im only using this for the live server.
+To use the DB I have to add another dependency to staging.py as I'm only using this for the live server.
 I did this by adding the following:
 ```
 dj-database-url==0.2.1
@@ -168,7 +169,7 @@ heroku run --app YOUR_HEROKU_APP python manage.py loaddata db.json --settings=se
 
 The last thing to do is ensure my staticfiles can be used on the server!
 
-firstly i install whitenoise:
+Firstly I install whitenoise:
 ```
 pip install -r requirements/base.txt
 ```
