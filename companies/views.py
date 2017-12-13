@@ -64,11 +64,11 @@ def company_profile(request):
          
         trade_check = CompanyTrade.objects.check_trade_status(company)
         sale_check = PlanetTrade.objects.check_planet_trade_status(company)
-
-        
+       
         companyelements = CompanyStorage.objects.filter(company=company)
         trades = CompanyTrade.objects.filter(buyer=company).order_by('-date_to_finish')[:10]
-        sales = PlanetTrade.objects.filter(seller=company).order_by('-date_to_finish')[:10]
+        player_sales = CompanyTrade.objects.filter(seller=company).order_by('-date_to_finish')[:5]
+        sales = PlanetTrade.objects.filter(seller=company).order_by('-date_to_finish')[:5]
 
         mines = MineOwnership.objects.filter(owner=company)
         ships = Ownership.objects.filter(owner=company)    
@@ -80,6 +80,7 @@ def company_profile(request):
             'mines': mines,
             'ships': ships,
             'sales': sales,
+            'player_sales': player_sales,
             })
     except Company.DoesNotExist:
         return redirect(new_company)       

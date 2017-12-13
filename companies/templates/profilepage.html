@@ -128,9 +128,46 @@
         </div>
         <!-- sales tab -->
         <div id="sales" class="tab-pane fade">
-            <h2 class="medheadline"> RECENT SALES </h2>
+            <h2 class="medheadline"> RECENT PLANET SALES </h2>
             <div class="colwrapper">   
                 {% for sale in sales %}
+                    <div class="color">
+                        <div class="tradewrapper borderbottom"  style="background-color: rgba({{sale.element.color}},0.2);">
+                            <div class="trade">   
+                                <h3>Element:</h3>
+                                <p>{{ sale.element.name }}</p>
+                            </div>
+                            <div class="trade">               
+                                <h3>Buyer:</h3>
+                                <p>{{ sale.buyer.name }}</p>
+                            </div>         
+                            <div class="trade"> 
+                                <h3>Merchant:</h3>
+                                <p>{{ sale.seller.name }}</p>               
+                            </div>
+                            <div class="trade"> 
+                                <h3>Amount:</h3>
+                                <p>{{ sale.amount }} Mt's</p>               
+                            </div>
+                            <div class="trade"> 
+                                <h3>Profit Made:</h3>
+                                <p>{{ sale.price }}c</p>               
+                            </div>
+                            <div class="trade"> 
+                                <h3>Finish Date:</h3>
+                                <p>{{ sale.date_to_finish }}</p>               
+                            </div>
+                            <div class="trade"> 
+                                <h3>Status:</h3>
+                                <p>{{ sale.status }}</p>               
+                            </div>
+                        </div> 
+                    </div>           
+                {% endfor %}
+            </div>
+            <h2 class="medheadline"> RECENT PLAYER SALES </h2>
+            <div class="colwrapper">   
+                {% for sale in player_sales %}
                     <div class="color">
                         <div class="tradewrapper borderbottom"  style="background-color: rgba({{sale.element.color}},0.2);">
                             <div class="trade">   
