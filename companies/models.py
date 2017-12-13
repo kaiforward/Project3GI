@@ -30,7 +30,7 @@ PLANET_CHOICE = (
 
 # Create your models here.
 class Company(models.Model):
-
+	
 	user = models.OneToOneField(User, on_delete=models.CASCADE, primary_key=True)
 	locationx = models.IntegerField(default=0)
 	locationy = models.IntegerField(default=0)
@@ -48,6 +48,7 @@ class Company(models.Model):
 
 class StorageManager(models.Manager):
 	def give_company_elements(self, company_id, element_id):
+		"""Get User/Company object and assign Element to it."""
 		company_element = self.create(
 			company=company_id,
 			element=element_id,
@@ -73,6 +74,7 @@ class CompanyStorage(models.Model):
 class ShipManager(models.Manager):
 
 	def create_ship (self, ship, buyer):
+		"""Create a ship and assign it to a User then return the object"""
 		new_ship = self.create(
 			owner=buyer,
 			ship=ship,
@@ -82,6 +84,7 @@ class ShipManager(models.Manager):
 		return new_ship
 
 	def add_ship (self, amount, ship, buyer):
+		"""Find current ship type and assign 1 more to a User then save the object"""
 		owned_ship = Ownership.objects.filter(owner=buyer, ship=ship)[0]
 		owned_ship.amount += amount
 		buyer.money -= ship.price * amount
@@ -103,7 +106,7 @@ class Ownership(models.Model):
 class MineManager(models.Manager):
 
 	def mine_elements(self, company):
-		# This add Elements to a company over time.
+		"""Get Player Mines and return of list of any that produce Elements."""
 		owned_mines = MineOwnership.objects.filter(owner=company)
 		# get time difference between last time user is on profile screen
 		time_multiplier = timezone.now() - company.last_checked 
@@ -129,6 +132,7 @@ class MineManager(models.Manager):
 		return all_minerals
 
 	def create_mine (self, mine, element, buyer):
+		"""Create a Mine and assign it to a User then return the object"""
 		new_mine = self.create(
 			owner=buyer,
 			mine=mine,
@@ -138,6 +142,7 @@ class MineManager(models.Manager):
 		return new_mine
 
 	def add_mine (self, amount, element, mine, buyer):
+		"""Find current mine type and assign 1 more to a User then save the object"""
 		owned_mine = MineOwnership.objects.filter(owner=buyer, element=element, mine=mine)[0]
 		owned_mine.amount += amount
 		buyer.money -= mine.price * amount
@@ -145,7 +150,6 @@ class MineManager(models.Manager):
 		owned_mine.save()
 
 class MineOwnership(models.Model):
-
 	owner = models.ForeignKey(Company, on_delete=models.CASCADE)
 	mine = models.ForeignKey(Mine, on_delete=models.CASCADE)
 	element = models.ForeignKey(Element, on_delete=models.CASCADE)
@@ -159,7 +163,7 @@ class MineOwnership(models.Model):
 
 class TradeManager(models.Manager):
 	def company_trade(self, seller, company_element, amount, buyer, owned_ship):
-
+		"""Get two Company objects and tranfer money and elements between them return trade Object."""
 		owned_ship.in_use += 1
 		owned_ship.save()
 		buyer_storage = CompanyStorage.objects.filter(company=buyer, element=company_element.element)
@@ -206,6 +210,7 @@ class TradeManager(models.Manager):
 		return trade
 
 	def check_trade_status(self, company):
+		"""Look at current User trades then modify and return any that have passed completion date"""
 		company_trades = CompanyTrade.objects.filter(buyer=company, status='Pending')
 
 		for trade in company_trades:
@@ -240,7 +245,7 @@ class CompanyTrade(models.Model):
 
 class PlanetTradeManager(models.Manager):
 	def planet_trade(self, seller, planet_element, amount, buyer, owned_ship):
-
+		"""Get a Planet and Company object and tranfer money and elements between them return trade Object."""
 		owned_ship.in_use += 1
 		owned_ship.save()
 		seller_storage = CompanyStorage.objects.filter(company=seller, element=planet_element.element)
@@ -285,6 +290,7 @@ class PlanetTradeManager(models.Manager):
 		return trade
 
 	def check_planet_trade_status(self, company):
+		"""Look at current User trades then modify and return any that have passed completion date"""
 		planet_trades = PlanetTrade.objects.filter(seller=company, status='Pending')
 
 		for trade in planet_trades:
