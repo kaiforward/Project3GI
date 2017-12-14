@@ -205,6 +205,13 @@ heroku local -f Procfile.local
 Part is this project were directly influenced by parts of the LMS specifically the user authentication system, as i referred to it a lot when starting the project.
 Lot's of other code was influenced by learning on the LMS as well as asking questions or solutions to them found on stack overflow and it was a great help in completing this project.
 
+### Issues and Testing
+
+So for testing in this project it tried to use django's built in unit-test functionality. I found this very difficult to do, as most of the website had been completed as exploratory coding. It was hard to go back to it and think of sensible ways to test the code. I also had a lot of issue with test's that I believed to be correct, but were not even registering as tests when I ran tests on my different apps. 
+I am not sure what issue's I was having but unfortunately I was not able to solve a lot of these problems before hand in. I would very much liked to have improved my testing and i'm disapointed that this is where the project is lacking as I can really see the benefit in correctly thought-out testing.
+
+Learning the django frameowrk this project was difficult but very rewarding, the main issue I had was understanding the different elements of django projects/apps. I made sure to spend extra time on understanding the way models and views interact and think this paid off in the final project. Having spent more time understanding the way DB models work I think I was able to make much more informed decisions on how the structure database worked and im very happy i did that.
+
 
 
 
