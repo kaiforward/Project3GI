@@ -582,7 +582,7 @@ hr {
 		margin: 5px 0px;
 	}
 	p {
-		font-size: 1.5em;
+		font-size: 1.3em;
 	}
 	.mobilehidden {	/*hides chosen linkbar when in mobile mode until opened*/
 		transition: opacity 0.2s;
