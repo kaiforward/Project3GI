@@ -19,7 +19,7 @@ class PlanetType(models.Model):
 		return self.name
 
 class PlanetManager(models.Manager):
-
+	"""Creat planet wit given attributes then return the Object """
 	def create_planet(self, planet_types):
 		random_name = word_creator(random.randint(1, 2))
 		random_affix = create_planet_affix()
@@ -52,7 +52,7 @@ class Planet(models.Model):
 
 class PlanetStorageManager(models.Manager):
 	def change_planet_prices(self, planet_object, element_object, element_rarity):
-
+		"""Get current planet and return it with new element objects"""
 		element_price = (random.randint(1, 10) + random.randint(10, 50)) * element_rarity
 
 		if random.random() > 0.5:
