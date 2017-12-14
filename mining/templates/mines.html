@@ -11,7 +11,7 @@
         <img src="/media/{{ mine.image }}" class="ship">
         <div class="shipinfo">
             <button onclick="location.href='{% url 'minedetail' mine.pk %}'">More</button>
-            <h2>Price: {{ mine.price }}</h2> 
+            <h2>Price: {% readable_int mine.price %}</h2> 
         </div>
     </div>
     <div class="shipmobile shipwrapper">
