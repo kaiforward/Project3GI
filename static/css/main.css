@@ -120,7 +120,7 @@ so the menu is hidden to the user, but is still visible to searches/screen reade
 	color: white;
 }
 .CCbutton { /*chosen color*/
-	font-size: 1em;
+	font-size: 1.3em;
 	width: fit-content;
 	background-color: #d84c4c;
 	color: white;
